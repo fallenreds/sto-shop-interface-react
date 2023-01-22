@@ -15,3 +15,12 @@
     padding: 10px;
     margin-top: 15px;
 }
+
+
+.shopping_cart {
+    border-radius: 3px;
+    overflow-y: auto;
+    background: var(--tg-theme-secondary-bg-color);
+    margin-top: 15px;
+    height: 200px ;
+}
