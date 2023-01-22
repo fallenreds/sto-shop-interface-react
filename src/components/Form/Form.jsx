@@ -1,4 +1,4 @@
-import  React, {useEffect, useState} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import './Form.css';
 import {useTelegram} from "../../hooks/useTelegram";
 
@@ -25,6 +25,21 @@ const Form = () => {
             tg.MainButton.show();
         }
     }, [name, lastname, phone, address, tg.MainButton])
+
+
+    const onSendData = useCallback(()=>{
+        const data = {
+            name,
+            lastname,
+            phone,
+            address
+        }
+        tg.sendData(JSON.stringify(data))
+    }, [name, lastname, phone, address, tg])
+
+    useEffect(() => {
+       tg.onEvent('mainButtonClicked',onSendData)
+    }, [onSendData, tg])
 
     const onChangeName = (e) => {
         setName(e.target.value)
