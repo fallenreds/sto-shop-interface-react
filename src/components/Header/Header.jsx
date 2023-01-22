@@ -5,14 +5,13 @@ import {useTelegram} from "../../hooks/useTelegram";
 
 
 const Header = () => {
-    const tg = window.Telegram.WebApp;
     const {user, onClose} = useTelegram();
 
     return (
         <div className={'header'}>
             <Button>Закрыть</Button>
             <span>
-               {user.username}
+               {user?.username}
             </span>
         </div>
     );
