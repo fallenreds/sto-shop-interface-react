@@ -5,13 +5,12 @@ import {useTelegram} from "./hooks/useTelegram";
 
 
 
-function  App(){
+function App() {
     const {onToggleButton, tg} = useTelegram();
 
-    useEffect(()=>
-    {
-        tg.ready()
-    },[])
+    useEffect(() => {
+        tg.ready();
+    }, [])
 
 
     return(
