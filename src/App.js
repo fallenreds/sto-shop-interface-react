@@ -12,7 +12,7 @@ function App() {
 
     useEffect(() => {
         tg.ready();
-    }, [tg])
+    }, [tg, onToggleButton])
 
 
     return(
