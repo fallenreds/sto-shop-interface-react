@@ -35,6 +35,7 @@ const Form = () => {
             address
         }
         tg.sendData(JSON.stringify(data))
+        tg.close()
     }, [name, lastname, phone, address, tg])
 
     useEffect(() => {
