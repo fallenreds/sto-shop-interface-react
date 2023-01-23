@@ -3,60 +3,51 @@ import './Form.css';
 import {useTelegram} from "../../hooks/useTelegram";
 
 const Form = () => {
-
-
-    const [name, setName] = useState('');
-    const [lastname, setLastName] = useState('');
-    const [phone, setPhone] = useState('380');
-    const [address, setAddress] = useState('');
+    const [country, setCountry] = useState('');
+    const [street, setStreet] = useState('');
+    const [subject, setSubject] = useState('physical');
     const {tg} = useTelegram();
 
-
-    const onSendData = useCallback(()=>{
+    const onSendData = useCallback(() => {
         const data = {
-            name,
-            lastname,
-            phone,
-            address
+            country,
+            street,
+            subject
         }
-        tg.sendData(JSON.stringify(data))
-
-    }, [name, lastname, phone, address, tg])
+        tg.sendData(JSON.stringify(data));
+    }, [country, street, subject])
 
     useEffect(() => {
-       tg.onEvent('mainButtonClicked',onSendData)
-        return ()=>{
-            tg.onEvent('mainButtonClicked',onSendData)
-        };
-    }, [tg, onSendData]);
+        tg.onEvent('mainButtonClicked', onSendData)
+        return () => {
+            tg.offEvent('mainButtonClicked', onSendData)
+        }
+    }, [onSendData])
 
     useEffect(() => {
         tg.MainButton.setParams({
             text: 'Отправить данные'
         })
-    }, [tg, tg.MainButton]);
-
+    }, [])
 
     useEffect(() => {
-        if(!name || !lastname || !phone || !address) {
+        if(!street || !country) {
             tg.MainButton.hide();
         } else {
             tg.MainButton.show();
         }
-    }, [name, lastname, phone, address, tg.MainButton])
+    }, [country, street])
 
-    const onChangeName = (e) => {
-        setName(e.target.value)
-    }
-    const onChangeLastName = (e) => {
-        setLastName(e.target.value)
-    }
-    const onChangePhone = (e) => {
-        setPhone(e.target.value)
+    const onChangeCountry = (e) => {
+        setCountry(e.target.value)
     }
 
-    const onChangeAddress = (e) => {
-        setAddress(e.target.value)
+    const onChangeStreet = (e) => {
+        setStreet(e.target.value)
+    }
+
+    const onChangeSubject = (e) => {
+        setSubject(e.target.value)
     }
 
     return (
@@ -65,51 +56,22 @@ const Form = () => {
             <input
                 className={'input'}
                 type="text"
-                placeholder={'Имя'}
-                value={name}
-                onChange={onChangeName}
-
+                placeholder={'Страна'}
+                value={country}
+                onChange={onChangeCountry}
             />
             <input
                 className={'input'}
                 type="text"
-                placeholder={'Фамилия'}
-                value={lastname}
-                onChange={onChangeLastName}
-
+                placeholder={'Улица'}
+                value={street}
+                onChange={onChangeStreet}
             />
-            <input
-                className={'input'}
-                type="text"
-                placeholder={'Номер телефона 380'}
-                value={phone}
-                onChange={onChangePhone}
-
-            />
-            <input
-                className={'input'}
-                type="text"
-                placeholder={'Адресс, отделение Новой Почты'}
-                value={address}
-                onChange={onChangeAddress}
-            />
-            <div className={'shopping_cart'}>
-                <p>Тут</p>
-                <p>Будет</p>
-                <p>Добавленые</p>
-                <p>Товары</p>
-                <p>Тут</p>
-                <p>Будет</p>
-                <p>Добавленые</p>
-                <p>Товары</p>
-                <p>Товары</p>
-                <p>Товары</p>
-                <p>Товары</p>
-
-
-            </div>
+            <select value={subject} onChange={onChangeSubject} className={'select'}>
+                <option value={'physical'}>Физ. лицо</option>
+                <option value={'legal'}>Юр. лицо</option>
+            </select>
         </div>
-
     );
 };
 
