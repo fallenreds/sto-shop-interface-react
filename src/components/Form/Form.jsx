@@ -64,7 +64,7 @@ const Form = () => {
             <h3>Введите ваши данные</h3>
             <input
                 className={'input'}
-                type="name"
+                type="text"
                 placeholder={'Имя'}
                 value={name}
                 onChange={onChangeName}
@@ -72,7 +72,7 @@ const Form = () => {
             />
             <input
                 className={'input'}
-                type="lastname"
+                type="text"
                 placeholder={'Фамилия'}
                 value={lastname}
                 onChange={onChangeLastName}
@@ -80,7 +80,7 @@ const Form = () => {
             />
             <input
                 className={'input'}
-                type="number"
+                type="text"
                 placeholder={'Номер телефона 380'}
                 value={phone}
                 onChange={onChangePhone}
