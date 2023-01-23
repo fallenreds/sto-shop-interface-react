@@ -4,12 +4,13 @@
     flex-direction: column;
     width: 100%;
     padding: 20px;
-    background-color: var(--tg-theme-button-color);
+    background-color: var(--tg-theme-bg-color);
 }
 
 .input {
     width: 100%;
     padding: 10px;
+    color: var(--tg-theme-text-color);
     background-color: var(--tg-theme-secondary-bg-color);
     margin-top: 15px;
 }
