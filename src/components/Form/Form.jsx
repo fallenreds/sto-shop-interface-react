@@ -9,7 +9,6 @@ const Form = () => {
     const [lastname, setLastName] = useState('');
     const [phone, setPhone] = useState('380');
     const [address, setAddress] = useState('');
-    const [subject, setSubject] = useState('physical');
     const {tg} = useTelegram();
 
     useEffect(() => {
@@ -34,9 +33,13 @@ const Form = () => {
             phone,
             address
         }
-        tg.sendData(data)
+        console.log(name,
+            lastname,
+            phone,
+            address)
+        tg.sendData(JSON.stringify(data))
 
-    }, [name, lastname, phone, address, tg])
+    }, [name, lastname, phone, address])
 
     useEffect(() => {
        tg.onEvent('mainButtonClicked',onSendData)
@@ -55,10 +58,6 @@ const Form = () => {
         setPhone(e.target.value)
     }
 
-
-    const onChangeSubject = (e) => {
-        setSubject(e.target.value)
-    }
     const onChangeAddress = (e) => {
         setAddress(e.target.value)
     }
@@ -97,10 +96,6 @@ const Form = () => {
                 value={address}
                 onChange={onChangeAddress}
             />
-            <select value={subject} onChange={onChangeSubject} className={'select'}>
-                <option value={'physical'}>Физ. лицо</option>
-                <option value={'legal'}>Юр. лицо</option>
-            </select>
             <div className={'shopping_cart'}>
                 <p>Тут</p>
                 <p>Будет</p>
