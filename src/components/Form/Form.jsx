@@ -87,7 +87,7 @@ const Form = () => {
                 value={address}
                 onChange={onChangeAddress}
             />
-            <div> className={'shopping_cart'}>
+            <div className={'shopping_cart'}>
             <p>Тут</p>
             <p>Будет</p>
             <p>Добавленые</p>
