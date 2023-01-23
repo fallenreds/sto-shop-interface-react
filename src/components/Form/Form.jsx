@@ -34,7 +34,7 @@ const Form = () => {
             phone,
             address
         }
-        tg.sendData(JSON.stringify(data))
+        tg.sendData(data)
 
     }, [name, lastname, phone, address, tg])
 
