@@ -35,7 +35,7 @@ const Form = () => {
             address
         }
         tg.sendData(JSON.stringify(data))
-        tg.close()
+
     }, [name, lastname, phone, address, tg])
 
     useEffect(() => {
@@ -43,7 +43,7 @@ const Form = () => {
         return ()=>{
             tg.onEvent('mainButtonClicked',onSendData)
         }
-    }, [onSendData, tg])
+    }, [tg, onSendData])
 
     const onChangeName = (e) => {
         setName(e.target.value)
