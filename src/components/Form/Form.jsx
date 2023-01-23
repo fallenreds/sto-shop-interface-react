@@ -11,20 +11,6 @@ const Form = () => {
     const [address, setAddress] = useState('');
     const {tg} = useTelegram();
 
-    useEffect(() => {
-        tg.MainButton.setParams({
-            text: 'Отправить данные'
-        })
-    }, [tg, tg.MainButton])
-
-    useEffect(() => {
-        if(!name || !lastname || !phone || !address) {
-            tg.MainButton.hide();
-        } else {
-            tg.MainButton.show();
-        }
-    }, [name, lastname, phone, address, tg.MainButton])
-
 
     const onSendData = useCallback(()=>{
         const data = {
@@ -33,10 +19,6 @@ const Form = () => {
             phone,
             address
         }
-        console.log(name,
-            lastname,
-            phone,
-            address)
         tg.sendData(JSON.stringify(data))
 
     }, [name, lastname, phone, address, tg])
@@ -45,8 +27,23 @@ const Form = () => {
        tg.onEvent('mainButtonClicked',onSendData)
         return ()=>{
             tg.onEvent('mainButtonClicked',onSendData)
+        };
+    }, [tg, onSendData]);
+
+    useEffect(() => {
+        tg.MainButton.setParams({
+            text: 'Отправить данные'
+        })
+    }, [tg, tg.MainButton]);
+
+
+    useEffect(() => {
+        if(!name || !lastname || !phone || !address) {
+            tg.MainButton.hide();
+        } else {
+            tg.MainButton.show();
         }
-    }, [tg, onSendData])
+    }, [name, lastname, phone, address, tg.MainButton])
 
     const onChangeName = (e) => {
         setName(e.target.value)
