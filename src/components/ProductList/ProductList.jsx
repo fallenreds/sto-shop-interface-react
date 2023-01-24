@@ -1,6 +1,5 @@
 /*import React, {useState} from 'react';*/
 import './ProductList.css';
-import Button from "../Button/Button";
 import data from '../../goods.json'
 import Good from "../Good/Good";
 
