@@ -3,7 +3,7 @@ import classes from "./Category.module.css";
 const Category = (props) => {
     return (
         <div className={classes.category}>
-            <img src="../../images/category-logo/acura.jpg" alt ='img' />
+            <img src={require('../../images/category-logo/bmw.jpg')} alt ='img' />
             Категория
         </div>
     );
