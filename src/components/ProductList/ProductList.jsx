@@ -1,9 +1,9 @@
 /*import React, {useState} from 'react';*/
 import './ProductList.css';
+
 import data from '../../goods.json'
 import Good from "../Good/Good";
-
-
+import SimpleSlider from "../../UI/Slider";
 
 
 
@@ -30,15 +30,7 @@ const ProductList = () => {
                 value=/*{search}*/'value'
                /* onChange={onSearch}*/
                 />
-            <select value='category'/*{category}*/ /*onChange={onChangeCategory}*/ className={'select'}>
-                <option value='1'>Категория 1</option>
-                <option value='2'>Категория 2</option>
-                <option value='3'>Категория 1.1</option>
-                <option value='3'>Категория 1.2</option>
-
-
-            </select>
-
+            <SimpleSlider/>
             <div className={"postlist"}>
 
                 {data.data.map(good=>
