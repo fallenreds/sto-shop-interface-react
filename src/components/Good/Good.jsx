@@ -11,7 +11,12 @@ const Good = (...props) => {
     return (
         <div className={classes.post}>
             <img alt='Фото' src={image }/>
-            {props[0].good.title}<p/>
+            <div className={classes.title}>
+                {props[0].good.title}<p/>
+            </div>
+            <div className={classes.cost}>
+                10000.00<p/>
+            </div>
             <button>Купить</button>
         </div>
     );
