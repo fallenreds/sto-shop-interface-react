@@ -35,6 +35,8 @@ const ProductList = () => {
                 <option value='2'>Категория 2</option>
                 <option value='3'>Категория 1.1</option>
                 <option value='3'>Категория 1.2</option>
+
+
             </select>
 
             <div className={"postlist"}>

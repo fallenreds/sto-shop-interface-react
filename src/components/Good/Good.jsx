@@ -7,7 +7,7 @@ const Good = (...props) => {
     if(!image){
         image ='https://t3.ftcdn.net/jpg/04/34/72/82/360_F_434728286_OWQQvAFoXZLdGHlObozsolNeuSxhpr84.jpg'
     }
-    console.log(image)
+    console.log()
     return (
         <div className={classes.post}>
             <img alt='Фото' src={image }/>
@@ -15,7 +15,7 @@ const Good = (...props) => {
                 {props[0].good.title}<p/>
             </div>
             <div className={classes.cost}>
-                10000.00<p/>
+                {props[0].good.price[284727]}₴<p/>
             </div>
             <button>Купить</button>
         </div>
