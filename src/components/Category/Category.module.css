@@ -7,7 +7,9 @@
     height: 180px;
     border-radius: 10px;
     align-items: center;
-    text-align: center
+    text-align: center;
+    overflow-x: hidden;
+
 
 }
 

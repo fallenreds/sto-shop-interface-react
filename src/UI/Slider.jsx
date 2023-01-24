@@ -5,10 +5,12 @@ import Category from "../components/Category/Category";
 export default class SimpleSlider extends Component {
     render() {
         const settings = {
+            variableWidth: true,
             dots: false,
-            infinite: false,
+            infinite: true,
             speed: 500,
-            slidesToShow: 3,
+            swipeToSlide: true,
+
             slidesToScroll: 1
         };
         return (
