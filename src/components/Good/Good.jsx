@@ -1,5 +1,4 @@
 import React from 'react';
-import Button from "../Button/Button";
 import classes from './Good.module.css'
 
 
@@ -13,7 +12,7 @@ const Good = (...props) => {
         <div className={classes.post}>
             <img alt='Фото' src={image }/>
             {props[0].good.title}<p/>
-            <Button>В корзину</Button>
+            <button>Купить</button>
         </div>
     );
 };

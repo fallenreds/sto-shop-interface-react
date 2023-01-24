@@ -17,3 +17,13 @@
     height: 130px;
     border-radius: 3px;
 }
+
+
+.post > button {
+    ;
+    background: var(--tg-theme-button-color);
+    color: var(--tg-theme-button-text-color);
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
