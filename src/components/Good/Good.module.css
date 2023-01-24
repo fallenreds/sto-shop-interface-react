@@ -1,0 +1,19 @@
+.post{
+    color: #000000;
+    margin: 10px 5px 0px 5px;
+
+    padding-top: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    background-color: rgba(241, 241, 241, 1);
+    width: 150px;
+    height: 230px;
+    border-radius: 3px;
+}
+
+.post>  img{
+    text-align: center;
+    width: 130px;
+    height: 130px;
+    border-radius: 3px;
+}

@@ -21,25 +21,8 @@
 }
 
 .postlist{
-    margin-top: 15px;
     display: flex;
-
-
+    flex-wrap: wrap;
+    margin-top: 10px;
 }
 
-.post{
-    color: var(--tg-theme-text-color);
-    margin: 10px;
-    padding-top: 10px;
-    padding-left: 10px;
-    padding-right: 10px;
-    background-color: var(--tg-theme-secondary-bg-color);
-    width: 80%;
-}
-
-.post>  img{
-
-    width: 100%;
-    height: 60%;
-
-}
