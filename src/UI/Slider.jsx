@@ -6,6 +6,7 @@ import category_data from '../category.json'
 export default class SimpleSlider extends Component {
     render() {
         const settings = {
+            arrows: false,
             variableWidth: true,
             dots: false,
             infinite: true,
