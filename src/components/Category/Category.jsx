@@ -1,10 +1,16 @@
 import React from 'react';
 import classes from "./Category.module.css";
-const Category = (props) => {
+const Category = (...props) => {
+
+    let image = props[0].category.image
+    console.log('../../images/category-logo/'+image)
+    const rq = require('../../images/category-logo/'+image)
+
     return (
         <div className={classes.category}>
-            <img src={require('../../images/category-logo/bmw.jpg')} alt ='img' />
-            Категория
+            <img src={rq} alt ='img' />
+            {props[0].category.title}
+
         </div>
     );
 };
