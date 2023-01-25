@@ -1,10 +1,10 @@
 .form {
     display: flex;
-    color: var(--tg-theme-text-color);
+    color: black;
     flex-direction: column;
     width: 100%;
     padding: 15px;
-    background-color: var(--tg-theme-bg-color);
+    background-color: white;
 }
 
 .input {

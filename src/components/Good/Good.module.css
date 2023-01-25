@@ -1,8 +1,10 @@
 .post{
-    color: var(--tg-theme-text-color);
+    color: black;
+    font-family: 'Montserrat';
+    font-weight: inherit;
     margin-top: 11px;
     padding: 11px;
-    background-color: var(--tg-theme-secondary-bg-color);
+    background-color: #DDDDDD;
     width: 170px;
     height: 279px;
     border-radius: 10px;
@@ -10,14 +12,14 @@
 }
 
 .title{
-    color: var(--tg-theme-text-color);
+    color: black;
     overflow-x:hidden;
     font-size: 13px;
     width: 150px;
     height: 30px;
 }
 .cost{
-    color: var(--tg-theme-text-color);
+    color: black;
     line-height: 30px;
     overflow-x:hidden;
     font-size: 13px;
@@ -36,7 +38,7 @@
 
 
 .post > button {
-    color: white;
+    color: black;
     text-align: center;
     font-size: 13px;
     font-weight: bold;
