@@ -17,12 +17,12 @@ export default class SimpleSlider extends Component {
 
 
 
-        let get_parents = category_data.data.map(function(ct) {
-            if(!ct.parent_id){
-                return ct;
-            }
-
-        });
+        // let get_parents = category_data.data.map(function(ct) {
+        //     if(!ct.parent_id){
+        //         return ct;
+        //     }
+        //
+        // });
 
         function get_сhildrens (parent_id) {
             return category_data.data.filter((ct)=>ct.parent_id === parent_id)
