@@ -14,7 +14,7 @@ const Header = () => {
                 className={classes.input}
                 type="text"
                 placeholder={'Поиск'}
-                value=/*{search}*/'value'
+                value=''
                 /* onChange={onSearch}*/
             />
         </div>

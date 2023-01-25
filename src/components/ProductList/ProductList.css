@@ -1,16 +1,16 @@
 .form {
     display: flex;
-    color: black;
+    color: var(--tg-theme-bg-color);
     flex-direction: column;
     width: 100%;
     padding: 15px;
-    background-color: white;
+    background-color: var(--tg-theme-secondary-bg-color);
 }
 
 .input {
     width: 100%;
     padding: 10px;
-    color: var(--tg-theme-text-color);
+    color: black;
     background-color: var(--tg-theme-secondary-bg-color);
     margin-top: 0px;
 }
@@ -27,3 +27,8 @@
     justify-content: space-between;
 }
 
+.maintext{
+    text-align: center;
+    font-family: 'Montserrat';
+    font-weight: bold;
+}

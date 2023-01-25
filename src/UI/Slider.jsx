@@ -42,7 +42,7 @@ export default class SimpleSlider extends Component {
                         return (
 
                             <div>
-                                {category.title}
+                                <div className={classes.category_text}>{category.title}</div>
                                 <Slider {...settings}>
                                     {
                                         child.map(category => <Category category={category}/>)

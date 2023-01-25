@@ -1,10 +1,10 @@
 .post{
-    color: black;
+    color: var(--tg-theme-text-color);
     font-family: 'Montserrat';
     font-weight: inherit;
     margin-top: 11px;
     padding: 11px;
-    background-color: #DDDDDD;
+    background-color: var(--tg-theme-secondary-bg-color);
     width: 170px;
     height: 279px;
     border-radius: 10px;
@@ -19,7 +19,7 @@
     height: 30px;
 }
 .cost{
-    color: black;
+    color: var(--tg-theme-text-color);
     line-height: 30px;
     overflow-x:hidden;
     font-size: 13px;
@@ -38,7 +38,7 @@
 
 
 .post > button {
-    color: black;
+    color: var(--tg-theme-text-color);
     text-align: center;
     font-size: 13px;
     font-weight: bold;

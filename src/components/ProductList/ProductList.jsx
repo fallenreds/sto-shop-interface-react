@@ -23,8 +23,8 @@ const ProductList = () => {
     return (
         <div className={"form"}>
             <SimpleSlider/>
+            <div className={"maintext"}><h3>Все товары</h3></div>
             <div className={"postlist"}>
-
                 {data.data.map(good=>
                     <Good good={good}/>
                     )}
