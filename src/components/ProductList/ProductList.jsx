@@ -2,7 +2,6 @@
 import './ProductList.css';
 
 import data from '../../goods.json'
-import category_data from '../../category.json'
 import Good from "../Good/Good";
 import SimpleSlider from "../../UI/Slider";
 

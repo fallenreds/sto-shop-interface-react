@@ -47,7 +47,12 @@ export default class SimpleSlider extends Component {
                                     }
                                 </Slider>
                             </div>
+
+
                         )
+                    }
+                    else{
+                        return null
                     }
                 })}
             </div>
