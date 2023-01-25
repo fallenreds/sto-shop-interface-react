@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Slider from "react-slick";
 import Category from "../components/Category/Category";
 import category_data from '../category.json'
+import classes from './slider.module.css'
 
 export default class SimpleSlider extends Component {
     render() {
@@ -34,7 +35,7 @@ export default class SimpleSlider extends Component {
         console.log(get_сhildrens(754099))
         return (
 
-            <div>
+            <div className={classes.upslider}>
                 {category_data.data.map(category => {
                     if(category.parent_id === undefined) {
                         const child = get_сhildrens(category.id)

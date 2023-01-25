@@ -22,14 +22,6 @@ const ProductList = () => {
 
     return (
         <div className={"form"}>
-            <h3>Выбирайте любые подходящие вам товары. Покупайте не выходя из Telegram!</h3>
-            <input
-                className={'input'}
-                type="text"
-                placeholder={'Поиск'}
-                value=/*{search}*/'value'
-               /* onChange={onSearch}*/
-                />
             <SimpleSlider/>
             <div className={"postlist"}>
 
