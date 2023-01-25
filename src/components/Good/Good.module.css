@@ -12,7 +12,7 @@
 }
 
 .title{
-    color: black;
+    color: var(--tg-theme-text-color);
     overflow-x:hidden;
     font-size: 13px;
     width: 150px;
