@@ -7,7 +7,7 @@ import classes from './slider.module.css'
 export default class SimpleSlider extends Component {
     render() {
         const settings = {
-            arrows: false,
+            arrows: true,
             variableWidth: true,
             dots: false,
             infinite: true,
