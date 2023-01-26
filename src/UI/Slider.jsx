@@ -3,6 +3,7 @@ import Slider from "react-slick";
 import Category from "../components/Category/Category";
 import category_data from '../category.json'
 import classes from './slider.module.css'
+import {type} from "@testing-library/user-event/dist/type";
 
 export default class SimpleSlider extends Component {
     render() {
@@ -13,7 +14,7 @@ export default class SimpleSlider extends Component {
             infinite: false,
             speed: 500,
             swipeToSlide: true,
-
+            pauseOnDotsHover: true,
             slidesToScroll: 1
         };
 
@@ -41,12 +42,14 @@ export default class SimpleSlider extends Component {
                         const child = get_сhildrens(category.id)
                         return (
 
-                            <div>
+                            <div className={classes.nodots}>
                                 <div className={classes.category_text}>{category.title}</div>
                                 <Slider {...settings}>
                                     {
                                         child.map(category => <Category category={category}/>)
+
                                     }
+
                                 </Slider>
                             </div>
 
