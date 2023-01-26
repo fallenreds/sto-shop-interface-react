@@ -3,7 +3,6 @@ import Slider from "react-slick";
 import Category from "../components/Category/Category";
 import category_data from '../category.json'
 import classes from './slider.module.css'
-import {type} from "@testing-library/user-event/dist/type";
 
 export default class SimpleSlider extends Component {
     render() {
