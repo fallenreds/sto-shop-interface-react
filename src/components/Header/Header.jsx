@@ -1,7 +1,7 @@
 import React from 'react';
 /*import Button from "../Button/Button";
 import {useTelegram} from "../../hooks/useTelegram";*/
-// import classes from "./Header.module.css"
+import classes from "./Header.module.css"
 // import ProductList from "../ProductList/ProductList";
 // import shopingCartList from "../ShopingCartList/ShopingCartList";
 import {Link} from "react-router-dom";
