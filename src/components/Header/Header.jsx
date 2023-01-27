@@ -7,7 +7,6 @@ import classes from "./Header.module.css"
 
 const Header = () => {
     /*const {user, onClose} = useTelegram();*/
-    const hostname = window.location.hostname
     function goShoppingCart() {
         window.location.assign('/shcart');
     }
