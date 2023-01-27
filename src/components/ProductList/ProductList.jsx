@@ -4,29 +4,31 @@ import './ProductList.css';
 import data from '../../goods.json'
 import Good from "../Good/Good";
 import SimpleSlider from "../../UI/Slider";
+import {useState} from "react";
 
 
 
 
-const ProductList = () => {
+const ProductList = (props) => {
 
-   /* const [search, setSearch] = useState('');
-    const [category, setCategory] = useState('');
-    const onSearch = (e) => {
-        setSearch(e.target.value)
+    const [categoryState, setCategory] = useState(null)
+    function categoryFilter(categoryId) {
+        setCategory(categoryId)
     }
 
-    const onChangeCategory = (e) => {
-        setCategory(e.target.value)
-    }*/
 
+    let filterGoodByCategory = categoryState === null ? data.data: data.data.filter(item=>item.category.id===categoryState)
+
+    console.log(filterGoodByCategory)
     return (
         <div className={"form"}>
-            <SimpleSlider/>
+            <SimpleSlider category={categoryFilter}/>
             <div className={"maintext"}><h3>Все товары</h3></div>
             <div className={"postlist"}>
-                {data.data.map(good=>
-                    <Good good={good}/>
+
+                {filterGoodByCategory.map(good=> <Good
+                        good={good}
+                        />
                     )}
 
 

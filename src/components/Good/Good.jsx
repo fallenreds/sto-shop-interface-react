@@ -7,7 +7,8 @@ const Good = (...props) => {
     if(!image){
         image ='https://t3.ftcdn.net/jpg/04/34/72/82/360_F_434728286_OWQQvAFoXZLdGHlObozsolNeuSxhpr84.jpg'
     }
-    console.log()
+
+
     return (
         <div className={classes.post}>
             <img alt='Фото' src={image }/>

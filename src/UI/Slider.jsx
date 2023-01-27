@@ -5,6 +5,7 @@ import category_data from '../category.json'
 import classes from './slider.module.css'
 
 export default class SimpleSlider extends Component {
+
     render() {
         const settings = {
             arrows: false,
@@ -17,22 +18,13 @@ export default class SimpleSlider extends Component {
             slidesToScroll: 1
         };
 
-
-
-        // let get_parents = category_data.data.map(function(ct) {
-        //     if(!ct.parent_id){
-        //         return ct;
-        //     }
-        //
-        // });
+        const changeCategory = this.props.category
 
         function get_сhildrens (parent_id) {
             return category_data.data.filter((ct)=>ct.parent_id === parent_id)
         }
 
 
-
-        console.log(get_сhildrens(754099))
         return (
 
             <div className={classes.upslider}>
@@ -43,9 +35,9 @@ export default class SimpleSlider extends Component {
 
                             <div className={classes.nodots}>
                                 <div className={classes.category_text}>{category.title}</div>
-                                <Slider {...settings}>
+                                <Slider  {...settings}>
                                     {
-                                        child.map(category => <Category category={category}/>)
+                                        child.map(category => <Category changeCategory={changeCategory} category={category}/>)
 
                                     }
 

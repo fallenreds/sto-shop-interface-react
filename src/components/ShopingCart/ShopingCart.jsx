@@ -15,7 +15,9 @@ const ShopingCart = (props) => {
     const [count, setCount] = useState(props.cart.count);
 
     function incrementCount() {
-        setCount(count+1)
+        if(count+1 <= good.residue){
+             setCount(count+1)
+        }
     }
     function decrementCount() {
         if(count-1>0){
