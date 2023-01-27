@@ -8,7 +8,7 @@ const ShopingCart = (props) => {
     var good = GoodData.data.filter(item=>
         {
             if(item.id===props.cart.good_id){
-                return true
+                return item
             }
         }
     )[0]
@@ -19,7 +19,7 @@ const ShopingCart = (props) => {
     }
     return (
         <div className={classes.shoppingCart}>
-            <img src={image}/>
+            <img src={image} alt='image'/>
             <div className={classes.info}>
                 <div className={classes.maintext}>{good.title}</div>
                 <div className={classes.price}>{good.price[284727]}₴</div>
