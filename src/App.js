@@ -5,6 +5,7 @@ import Header from "./components/Header/Header";
 import {Route, Routes} from "react-router-dom";
 import ProductList from "./components/ProductList/ProductList";
 import Form from "./components/Form/Form";
+import ShopingCartList from "./components/ShopingCartList/ShopingCartList";
 
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
                 <Routes>
                     <Route index element={<ProductList />}/>
                     <Route path={'form'} element={<Form />}/>
+                    <Route path={'shcart'} element={<ShopingCartList />}/>
                 </Routes>
         </div>
     );
