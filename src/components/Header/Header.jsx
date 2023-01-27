@@ -2,16 +2,18 @@ import React from 'react';
 /*import Button from "../Button/Button";
 import {useTelegram} from "../../hooks/useTelegram";*/
 import classes from "./Header.module.css"
+import ProductList from "../ProductList/ProductList";
+import shopingCartList from "../ShopingCartList/ShopingCartList";
 
 
 
 const Header = () => {
     /*const {user, onClose} = useTelegram();*/
     function goShoppingCart() {
-        window.location.assign('/shcart');
+        shopingCartList()
     }
     function goProductlist() {
-        window.location.assign('/');
+        ProductList()
     }
     return (
         <div className={classes.header}>
