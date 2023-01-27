@@ -5,11 +5,9 @@ import GoodData from  "../../goods.json"
 
 const ShopingCart = (props) => {
 
-    var good = GoodData.data.filter(item=>
+    const good = GoodData.data.filter(item=>
         {
-            if(item.id===props.cart.good_id){
-                return item
-            }
+            return item.id === props.cart.good_id;
         }
     )[0]
 
@@ -19,7 +17,7 @@ const ShopingCart = (props) => {
     }
     return (
         <div className={classes.shoppingCart}>
-            <img src={image} alt='image'/>
+            <img src={image} alt='asdadfas'/>
             <div className={classes.info}>
                 <div className={classes.maintext}>{good.title}</div>
                 <div className={classes.price}>{good.price[284727]}₴</div>
