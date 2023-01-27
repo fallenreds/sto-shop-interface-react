@@ -15,12 +15,20 @@ export function useTelegram() {
             tg.MainButton.show();
         }
     }
+    const get_uid = () =>{
+        if(tg.initDataUnsafe?.user.id){
+            return tg.initDataUnsafe.user.id
+        }
+        else{
+            return 516842877
+        }
+    }
 
     return {
         onClose,
         onToggleButton,
         tg,
         user: tg.initDataUnsafe?.user,
-        uid: tg.initDataUnsafe?.user.id
+        uid: get_uid()
     }
 }

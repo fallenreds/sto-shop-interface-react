@@ -22,3 +22,18 @@
 .username{
     margin-left: auto;
 }
+
+.header shopping_cart{
+    padding: 10px;
+}
+
+
+.shopping_cart button{
+    background: none;
+    border: none;
+}
+
+.shopping_cart img{
+    height: 50%;
+    width: 50%;
+}

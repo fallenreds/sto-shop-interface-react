@@ -7,7 +7,7 @@ import ShopingCart from "../ShopingCart/ShopingCart";
 
 
 const ShopingCartList = () => {
-    const uid = useTelegram().uid
+    const uid = /*516842877*/ useTelegram().uid
     let shoppingCartData = CartData
     let userCarts = shoppingCartData.filter(function(shoppingCartData) {
         return  shoppingCartData.telegram_id === uid;

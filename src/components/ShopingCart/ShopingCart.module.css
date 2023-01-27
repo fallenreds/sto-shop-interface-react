@@ -1,11 +1,12 @@
 
 
 .shoppingCart{
+    color: var(--tg-theme-text-color);
     display: flex;
     font-size: 3vw;
     margin: 5%;
     border-radius: 10px;
-    background: #dedede;
+    background: var(--tg-theme-secondary-bg-color);
     padding: 3%;
     width: 90%;
     height: 90%;
@@ -34,30 +35,38 @@
 
 
 .counter{
-    font-size: 3vh;
-    display: inline-flex;
-    border: 0.2vw solid black;
-    border-radius: 1vh  ;
 
+    display: inline-flex;
+    font-weight: bold;
+    background: none;
+    border: solid;
+    border-radius: 1vw;
+    border-width: 0.15vw;
+    margin-bottom: 1vw;
 }
 
 .counter span{
-    padding-right: 2vh;
-    padding-left: 2vh;
-    padding-top: 0.5vh;
-    padding-bottom: 0.5vh;
-    border-left:1px solid ;
-    border-right:1px solid ;
+    padding: 0.1vw 3vw 0.1vw 3vw;
+    border-left:0.1vw solid ;
+    border-right:0.1vw solid ;
 
 }
-button
-{
-    padding-top: 0.5vh;
-    padding-bottom: 0.5vh;
-    padding-left: 0.5vh;
-    padding-right: 0.5vh;
-    background: #dedede;
-    font-size: 3vh;
-    border: none;
 
+.counter button{
+    font-size: 3vw;
+    background: none;
+    border: none;
+    font-weight: bold;
+    padding: 0.1vw 1vw 0.1vw 1vw;
+}
+
+.finalprice{
+    font-size: 4vw;
+    font-weight: bold;
+    color: rgba(19, 189, 50, 1)
+}
+
+.finaltext{
+    color:var(--tg-theme-text-color);
+    font-size: 3vw;
 }

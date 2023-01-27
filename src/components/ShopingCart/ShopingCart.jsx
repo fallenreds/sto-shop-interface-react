@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import classes from "../ShopingCart/ShopingCart.module.css";
 import GoodData from  "../../goods.json"
 
@@ -11,6 +11,21 @@ const ShopingCart = (props) => {
         }
     )[0]
 
+
+    const [count, setCount] = useState(props.cart.count);
+
+    function incrementCount() {
+        setCount(count+1)
+    }
+    function decrementCount() {
+        if(count-1>0){
+            setCount(count-1)
+        }
+
+    }
+
+
+
     let image = good.image[0]
     if(!image){
         image ='https://t3.ftcdn.net/jpg/04/34/72/82/360_F_434728286_OWQQvAFoXZLdGHlObozsolNeuSxhpr84.jpg'
@@ -22,9 +37,19 @@ const ShopingCart = (props) => {
                 <div className={classes.maintext}>{good.title}</div>
                 <div className={classes.price}>{good.price[284727]}₴</div>
                 <div className={classes.counter}>
-                    <button>-</button>
-                    <span>{props.cart.count}</span>
-                    <button>+</button>
+                    <button onClick={decrementCount}>-</button>
+                    <span>{count}</span>
+                    <button onClick={incrementCount}>+</button>
+                </div>
+                <div lassName={classes.info}>В наличии: {good.residue}</div>
+
+                <div className={classes.finalprice}>
+
+                    <div className={classes.finaltext}>
+                        К оплате:
+                    </div>
+
+                    {good.price[284727]*count} ₴
                 </div>
             </div>
         </div>
