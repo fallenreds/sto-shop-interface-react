@@ -9,12 +9,12 @@ import {Link} from "react-router-dom";
 
 
 const Header = () => {
-    /*const {user, onClose} = useTelegram();*/
+
     function goShoppingCart() {
-        <Link to='/shcart'/>
+        window.Telegram.WebApp.openLink('/schart')
     }
     function goProductlist() {
-        <Link to='/'/>
+        window.Telegram.WebApp.openLink('/')
     }
     return (
         <div className={classes.header}>
