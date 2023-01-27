@@ -4,16 +4,17 @@ import {useTelegram} from "../../hooks/useTelegram";*/
 import classes from "./Header.module.css"
 import ProductList from "../ProductList/ProductList";
 import shopingCartList from "../ShopingCartList/ShopingCartList";
+import {Link} from "react-router-dom";
 
 
 
 const Header = () => {
     /*const {user, onClose} = useTelegram();*/
     function goShoppingCart() {
-        shopingCartList()
+        <Link to='/shcart'/>
     }
     function goProductlist() {
-        ProductList()
+        <Link to='/'/>
     }
     return (
         <div className={classes.header}>
