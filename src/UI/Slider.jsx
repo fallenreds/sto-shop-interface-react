@@ -35,7 +35,7 @@ export default class SimpleSlider extends Component {
 
                             <div className={classes.nodots}>
                                 <div className={classes.category_text}>{category.title}</div>
-                                <Slider  {...settings}>
+                                <Slider  {...settings} >
                                     {
                                         child.map(category => <Category changeCategory={changeCategory} category={category}/>)
 

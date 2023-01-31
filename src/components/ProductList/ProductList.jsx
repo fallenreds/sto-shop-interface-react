@@ -1,10 +1,10 @@
-/*import React, {useState} from 'react';*/
 import './ProductList.css';
 import category from "../../category.json";
-import data from '../../goods.json'
 import Good from "../Good/Good";
 import SimpleSlider from "../../UI/Slider";
-import {useState} from "react";
+import {useEffect, useState} from "react";
+import {getGoods} from "../../hooks/api";
+
 
 
 
@@ -12,6 +12,16 @@ import {useState} from "react";
 const ProductList = () => {
 
     const [categoryState, setCategory] = useState(null)
+
+    const [goodsState, setGoods] = useState([])
+
+
+    useEffect(()=>{
+        getGoods({setGoods})
+    },[setGoods])
+
+
+
     function categoryFilter(categoryId) {
         setCategory(categoryId)
     }
@@ -24,8 +34,16 @@ const ProductList = () => {
 
 
 
+    //
+    // let filterGoodByCategory = categoryState === null ? data.data: data.data.filter(item=>item.category.id===categoryState)
 
-    let filterGoodByCategory = categoryState === null ? data.data: data.data.filter(item=>item.category.id===categoryState)
+    function filterGoodByCategory() {
+        if(categoryState === null){
+            return goodsState
+        }
+        return goodsState.filter(item=>item.category.id===categoryState)
+    }
+
 
     return (
         <div className={"form"}>
@@ -35,9 +53,9 @@ const ProductList = () => {
 
             </div>
 
-            <div className={"postlist"}>
+            <div className={"postlist"}> 
 
-                {filterGoodByCategory.map(good=> <Good
+                {filterGoodByCategory().map(good=> <Good
                         good={good}
                         />
                     )}

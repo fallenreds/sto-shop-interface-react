@@ -20,7 +20,7 @@ const Header = () => {
                 className={classes.input}
                 type="text"
                 placeholder={'Поиск'}
-                value=''
+                defaultValue=''
                 /* onChange={onSearch}*/
             />
             <div className={classes.shopping_cart}>
