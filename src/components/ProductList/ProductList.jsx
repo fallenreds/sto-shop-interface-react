@@ -3,24 +3,30 @@ import category from "../../category.json";
 import Good from "../Good/Good";
 import SimpleSlider from "../../UI/Slider";
 import {useEffect, useState} from "react";
-import {getGoods} from "../../hooks/api";
+import {getGoods, getShoppingCart} from "../../hooks/api";
+
 
 
 
 
 
 const ProductList = () => {
+    const uid = 516842877
+
 
     const [categoryState, setCategory] = useState(null)
-
+    const [shoppingCartState, setShoppingCart] = useState([])
     const [goodsState, setGoods] = useState([])
 
+    useEffect(()=>{
+        getShoppingCart({setShoppingCart}, uid)
+    },[setShoppingCart])
 
     useEffect(()=>{
         getGoods({setGoods})
     },[setGoods])
 
-
+    const cartsGoods = shoppingCartState.filter(item=> item.telegram_id === uid).map(item=>item.good_id)
 
     function categoryFilter(categoryId) {
         setCategory(categoryId)
@@ -56,7 +62,7 @@ const ProductList = () => {
             <div className={"postlist"}> 
 
                 {filterGoodByCategory().map(good=> <Good
-                        good={good}
+                        good={good} carts={cartsGoods}
                         />
                     )}
 

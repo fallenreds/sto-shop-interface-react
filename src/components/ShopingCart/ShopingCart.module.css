@@ -1,5 +1,3 @@
-
-
 .shoppingCart{
     color: var(--tg-theme-text-color);
     display: flex;
@@ -15,8 +13,8 @@
 .shoppingCart  img{
 
     border-radius: 10px;
-    width: 40%;
-    height: 40%;
+    width: 33vw;
+    height: 33vw;
 
 }
 
@@ -67,6 +65,8 @@
 }
 
 .finaltext{
+
     color:var(--tg-theme-text-color);
     font-size: 3vw;
 }
+
