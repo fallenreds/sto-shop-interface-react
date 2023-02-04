@@ -2,27 +2,24 @@ import React, {useEffect, useState} from 'react';
 import classes from "./ShopingCartList.module.css";
 import ShopingCart from "../ShopingCart/ShopingCart";
 import {getGoods, getShoppingCart} from "../../hooks/api";
+import {useNavigate} from "react-router-dom";
 
-
-
-
-const ShopingCartList = () => {
-    const uid = 516842877
-    const [goodsState, setGoods] = useState([])
+const ShopingCartList = (props) => {
+    const router = useNavigate()
+    const uid = props.uid
     const [shoppingCartState, setShoppingCart] = useState([])
 
+    const setGoods = props.setGoods
+    const goodsState = props.goodsState
 
 
     useEffect(()=>{
        getGoods({setGoods})
-    },[setGoods])
+    },[])
 
     useEffect(()=>{
         getShoppingCart({setShoppingCart}, uid)
-    },[setShoppingCart])
-
-
-
+    },[])
 
 
 
@@ -31,12 +28,14 @@ const ShopingCartList = () => {
     }
 
     return (
+
         <div className={classes.shoppingCartList}>
 
             {shoppingCartState.map(info=>
+
                 <ShopingCart cart={info} goodsState={goodsState} removeCart={removeCart}/>
             )}
-            <button className={classes.makeOrder}>Сделать Заказ</button>
+            <button onClick={()=>router('/form')} className={classes.makeOrder}>Сделать Заказ</button>
         </div>
     );
 };

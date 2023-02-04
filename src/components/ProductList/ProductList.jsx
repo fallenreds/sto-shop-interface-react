@@ -10,21 +10,25 @@ import {getGoods, getShoppingCart} from "../../hooks/api";
 
 
 
-const ProductList = () => {
-    const uid = 516842877
+const ProductList = (props) => {
+    const uid = props.uid
 
 
     const [categoryState, setCategory] = useState(null)
-    const [shoppingCartState, setShoppingCart] = useState([])
+    const [shoppingCartState, setShoppingCart] = useState(props.shoppingCartState)
     const [goodsState, setGoods] = useState([])
-
+    // const setGoods = props.setGoods
+    // const goodsState = props.goodsState
+    //
     useEffect(()=>{
         getShoppingCart({setShoppingCart}, uid)
-    },[setShoppingCart])
+    },[])
 
     useEffect(()=>{
         getGoods({setGoods})
-    },[setGoods])
+    },[])
+
+
 
     const cartsGoods = shoppingCartState.filter(item=> item.telegram_id === uid).map(item=>item.good_id)
 
@@ -62,7 +66,7 @@ const ProductList = () => {
             <div className={"postlist"}> 
 
                 {filterGoodByCategory().map(good=> <Good
-                        good={good} carts={cartsGoods}
+                        good={good} carts={cartsGoods} uid={uid}
                         />
                     )}
 

@@ -51,6 +51,7 @@
 }
 
 .counter button{
+    color: var(--tg-theme-text-color);
     font-size: 3vw;
     background: none;
     border: none;

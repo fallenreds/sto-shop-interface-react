@@ -5,7 +5,7 @@ import {useNavigate} from "react-router-dom";
 
 
 const Good = (props) => {
-    const uid = 516842877
+    const uid = props.uid
     const buyButton = <button onClick={addToShoppingCart}>Купить</button>
     const toShoppingCartButton = <button onClick={()=>router('/shcart')} style={{background: "rgba(215, 125, 72, 0.3)"}}>В корзину</button>
     const cantBuyButton = <button style={{background: "rgba(255,0,0,0.13)", borderColor:"rgba(255,0,0, 1)"}}>Нет в наличии</button>

@@ -1,7 +1,7 @@
 import axios from "axios";
 
 
-const base_url = "https://139.162.218.167/" //"http://localhost:8000/"
+const base_url = "http://127.0.0.1:8000/" //https://139.162.218.167/"
 
 
 
@@ -28,6 +28,7 @@ export function getShoppingCart(props, telegramId) {
         }
     )
 }
+
 
 export function postShoppingCart(telegramId, goodId) {
     axios.post(
@@ -58,5 +59,33 @@ export function updateShoppingCart(CartId, count) {
 
         .then(response=>{
             console.log(response.status)
+        })
+}
+
+export function postOrder(telegramId,
+                          goodsList,
+                          name,
+                          lastName,
+                          prepayment,
+                          phone,
+                          address,
+                          description,
+                          ) {
+    axios.post(
+        base_url + 'api/v1/order/',
+        {
+            "telegram_id": telegramId,
+            "goods_list": goodsList,
+            "name": name,
+            "last_name": lastName,
+            "prepayment":  prepayment,
+            "phone": phone,
+            "nova_post_address": address,
+            "description":description
+        }
+    )
+
+        .then(response=>{
+            return response.status
         })
 }

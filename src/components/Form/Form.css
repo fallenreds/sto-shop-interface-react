@@ -1,13 +1,16 @@
 .form {
+    padding: 14vw 5vw 10vw 5vw;
     display: flex;
     color: var(--tg-theme-text-color);
     flex-direction: column;
     width: 100%;
-    padding: 20px;
+    font-family: 'Montserrat';
+    font-weight: bold;
     background-color: var(--tg-theme-bg-color);
 }
 
 .input {
+    border-radius: 10px;
     width: 100%;
     padding: 10px;
     color: var(--tg-theme-text-color);
@@ -28,4 +31,16 @@
     background: var(--tg-theme-secondary-bg-color);
     margin-top: 15px;
     height: 200px ;
+}
+
+.makeOrder{
+    margin-top: 10vw;
+    background: rgba(215, 125, 72, 1);
+    color: var(--tg-theme-text-color);
+    font-family: 'Montserrat';
+    font-weight: bold;
+    width: 100%;
+    padding: 3vw;
+    border-radius: 10px;
+    border: None;
 }

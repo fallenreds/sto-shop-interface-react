@@ -1,45 +1,59 @@
 import React, {useCallback, useEffect, useState} from 'react';
 import './Form.css';
 import {useTelegram} from "../../hooks/useTelegram";
+import ShopingCartList from "../ShopingCartList/ShopingCartList";
+import {deleteShoppingCart, getShoppingCart, postOrder} from "../../hooks/api";
+import {useNavigate} from "react-router-dom";
 
-const Form = () => {
+const Form = (props) => {
+    let uid = props.uid
 
     const [name, setName] = useState('');
     const [lastname, setLastName] = useState('');
-    const [phone, setPhone] = useState('380');
+    const [phone, setPhone] = useState('');
     const [address, setAddress] = useState('');
+    const [prepayment, setPrepayment] = useState(false);
+    const [description, setDescription] = useState('');
     const {tg} = useTelegram();
 
-    const onSendData = useCallback(() => {
-        const data = {
-            name,
-            lastname,
-            phone,
-            address
-        }
-        tg.sendData(JSON.stringify(data));
-    }, [address, lastname, name, phone, tg])
+    const [shoppingCartState, setShoppingCart] = useState([])
 
-    useEffect(() => {
-        tg.onEvent('mainButtonClicked', onSendData)
-        return () => {
-            tg.offEvent('mainButtonClicked', onSendData)
-        }
-    }, [onSendData, tg])
+    useEffect(()=>{
+        getShoppingCart({setShoppingCart}, uid)
+    },[])
 
-    useEffect(() => {
-        tg.MainButton.setParams({
-            text: 'Отправить данные'
-        })
-    }, [tg.MainButton])
+    // const onSendData = useCallback(() => {
+    //     const data = {
+    //         name,
+    //         lastname,
+    //         phone,
+    //         address,
+    //         prepayment,
+    //
+    //     }
+    //     tg.sendData(JSON.stringify(data));
+    // }, [address, lastname, name, phone, tg])
+    //
+    // useEffect(() => {
+    //     tg.onEvent('mainButtonClicked', onSendData)
+    //     return () => {
+    //         tg.offEvent('mainButtonClicked', onSendData)
+    //     }
+    // }, [onSendData, tg])
 
-    useEffect(() => {
-        if(!name || !lastname || !phone || !address) {
-            tg.MainButton.hide();
-        } else {
-            tg.MainButton.show();
-        }
-    }, [name, lastname, phone, address, tg.MainButton])
+    // useEffect(() => {
+    //     tg.MainButton.setParams({
+    //         text: 'Отправить данные'
+    //     })
+    // }, [tg.MainButton])
+    //
+    // useEffect(() => {
+    //     if(!name || !lastname || !phone || !address) {
+    //         tg.MainButton.hide();
+    //     } else {
+    //         tg.MainButton.show();
+    //     }
+    // }, [name, lastname, phone, address, tg.MainButton])
 
     const onChangeName = (e) => {
         setName(e.target.value)
@@ -55,16 +69,48 @@ const Form = () => {
     const onChangeAddress = (e) => {
         setAddress(e.target.value)
     }
+    const onChangeDescription = (e) => {
+        setDescription(e.target.value)
+    }
+    const onChangePrepayment = (e) => {
+        if (e.target.value ===1){
+            setPrepayment(false)
+        }
+        else{
+            setPrepayment(true)
+        }
+    }
+    const router = useNavigate()
+    function create_order() {
+         postOrder(props.uid,
+            shoppingCartState,
+            name,
+            lastname,
+            prepayment,
+            phone,
+            address,
+            description
+            )
+         shoppingCartState.map(item=>deleteShoppingCart(item.id))
+         router('/')
+    }
+    function showSubmit() {
+        if(name && lastname && phone && address) {
+            return   <button onClick={create_order} className={'makeOrder'}>Оформить заказ</button>
+        }
+    }
 
     return (
         <div className={"form"}>
+            <form>
             <h3>Введите ваши данные</h3>
             <input
                 className={'input'}
-                type="text"
+                type="name"
                 placeholder={'Имя'}
                 value={name}
                 onChange={onChangeName}
+                required
             />
             <input
                 className={'input'}
@@ -72,13 +118,18 @@ const Form = () => {
                 placeholder={'Фамилия'}
                 value={lastname}
                 onChange={onChangeLastName}
+                required
             />
             <input
                 className={'input'}
-                type="text"
-                placeholder={'Номер телефона 380'}
+                id="phone"
+                name="phone"
+                pattern="^\+?3?8?(0\d{9})$"
+                type="tel"
+                placeholder={'Номер телефона +380'}
                 value={phone}
                 onChange={onChangePhone}
+                required
             />
             <input
                 className={'input'}
@@ -86,22 +137,22 @@ const Form = () => {
                 placeholder={'Адресс, отделение Новой Почты'}
                 value={address}
                 onChange={onChangeAddress}
+                required
             />
-            <div className={'shopping_cart'}>
-            <p>Тут</p>
-            <p>Будет</p>
-            <p>Добавленые</p>
-            <p>Товары</p>
-            <p>Тут</p>
-            <p>Будет</p>
-            <p>Добавленые</p>
-            <p>Товары</p>
-            <p>Товары</p>
-            <p>Товары</p>
-            <p>Товары</p>
-
-
-        </div>
+                <input
+                    className={'input'}
+                    type="text"
+                    placeholder={'Комментрарий к отправке'}
+                    value={description}
+                    onChange={onChangeDescription}
+                    required
+                />
+                <select className={'input'} name="prepayment" onChange={onChangePrepayment}>
+                    <option value="1">Наложеный платеж</option>
+                    <option value="2">Предоплата</option>
+                </select>
+                {showSubmit()}
+            </form>
         </div>
     );
 };

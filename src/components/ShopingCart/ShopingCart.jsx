@@ -2,6 +2,8 @@ import React, {useState} from 'react';
 import classes from "../ShopingCart/ShopingCart.module.css";
 import {deleteShoppingCart, updateShoppingCart} from "../../hooks/api";
 
+const test_price = 298792
+const prod_price = 284727
 const ShopingCart = (props) => {
 
     const [count, setCount] = useState(props.cart.count);
@@ -52,7 +54,7 @@ const ShopingCart = (props) => {
                         К оплате:
                     </div>
 
-                    {good.price[284727]*count} ₴
+                    {good.price[prod_price]*count} ₴
                 </div>
             </div>
             <button
