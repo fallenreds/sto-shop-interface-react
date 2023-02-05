@@ -14,6 +14,7 @@ const Form = (props) => {
     const [address, setAddress] = useState('');
     const [prepayment, setPrepayment] = useState(false);
     const [description, setDescription] = useState('');
+    const [formSuccess, setFormSuccess] = useState(false);
     const {tg} = useTelegram();
 
     const [shoppingCartState, setShoppingCart] = useState([])
@@ -92,13 +93,22 @@ const Form = (props) => {
             description
             )
          shoppingCartState.map(item=>deleteShoppingCart(item.id))
-         router('/')
+        setFormSuccess(true)
+        router('/successpage')
     }
     function showSubmit() {
         if(name && lastname && phone && address) {
             return   <button onClick={create_order} className={'makeOrder'}>Оформить заказ</button>
         }
     }
+
+    // function isSuccess() {
+    //     if(formSuccess===true){
+    //         return <>
+    //             Вы успешно создали заказ. Для того что бы просмотреть стататуз заказа или его оплатить, нажмите на кнопку статус заказов 📦
+    //         </>
+    //     }
+    // }
 
     return (
         <div className={"form"}>

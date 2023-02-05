@@ -7,6 +7,7 @@ import ProductList from "./components/ProductList/ProductList";
 import Form from "./components/Form/Form";
 import ShopingCartList from "./components/ShopingCartList/ShopingCartList";
 import {getGoods, getShoppingCart} from "./hooks/api";
+import SuccessPage from "./components/SuccessPage/SuccessPage";
 
 const tg = window.Telegram.WebApp;
 function App() {
@@ -39,6 +40,8 @@ function App() {
 
                     <Route path={'form'} element={<Form uid={uid}/>}/>
                     <Route path={'shcart'} element={<ShopingCartList goodsState={goodsState} setGoods={setGoods} uid={uid}/>}/>
+                    <Route path={'successpage'} element={<SuccessPage tg={tg}/>}/>
+
                 </Routes>
         </div>
     );
