@@ -15,11 +15,11 @@ const ShopingCartList = (props) => {
 
     useEffect(()=>{
        getGoods({setGoods})
-    },[])
+    },[setGoods])
 
     useEffect(()=>{
         getShoppingCart({setShoppingCart}, uid)
-    },[])
+    },[uid])
 
 
 

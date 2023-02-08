@@ -21,7 +21,7 @@ function App() {
 
     useEffect(()=>{
         getShoppingCart({setShoppingCart}, uid)
-    },[])
+    },[uid])
 
     useEffect(()=>{
         getGoods({setGoods})

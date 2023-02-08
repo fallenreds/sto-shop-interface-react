@@ -20,7 +20,7 @@ const ProductList = (props) => {
 
     useEffect(()=>{
         getShoppingCart({setShoppingCart}, uid)
-    },[categoryState])
+    },[categoryState, props.searchState, uid])
 
     useEffect(()=>{
         getGoods({setGoods})
