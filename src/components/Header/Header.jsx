@@ -1,12 +1,8 @@
 import React from 'react';
-/*import Button from "../Button/Button";
-import {useTelegram} from "../../hooks/useTelegram";*/
 import classes from "./Header.module.css"
-// import ProductList from "../ProductList/ProductList";
-// import shopingCartList from "../ShopingCartList/ShopingCartList";
 import { useNavigate } from 'react-router-dom';
 
-const Header = () => {
+const Header = (props) => {
     const router = useNavigate()
     // function goShoppingCart() {
     //     window.Telegram.WebApp.openLink('')
@@ -14,6 +10,11 @@ const Header = () => {
     // function goProductlist() {
     //     window.Telegram.WebApp.openLink('/')
     // }
+    const onSearch = (e) => {
+        props.setSearch(e.target.value)
+    }
+
+
     return (
         <div className={classes.header}>
             <input
@@ -21,7 +22,8 @@ const Header = () => {
                 type="text"
                 placeholder={'Поиск'}
                 defaultValue=''
-                /* onChange={onSearch}*/
+                onChange={onSearch}
+                value={props.searchState}
             />
             <div className={classes.shopping_cart}>
                 <button onClick={()=>router('/')}><img src={require("../../product-list.png")} alt ='img'/></button>

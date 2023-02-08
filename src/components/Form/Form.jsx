@@ -1,10 +1,8 @@
-import React, {useCallback, useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import './Form.css';
-import {useTelegram} from "../../hooks/useTelegram";
-import ShopingCartList from "../ShopingCartList/ShopingCartList";
-import {deleteShoppingCart, getShoppingCart, postOrder} from "../../hooks/api";
+import {deleteShoppingCart, getGoods, getShoppingCart, postOrder} from "../../hooks/api";
 import {useNavigate} from "react-router-dom";
-
+const prod_price = 284727
 const Form = (props) => {
     let uid = props.uid
 
@@ -15,14 +13,33 @@ const Form = (props) => {
     const [prepayment, setPrepayment] = useState(false);
     const [description, setDescription] = useState('');
     const [formSuccess, setFormSuccess] = useState(false);
-    const {tg} = useTelegram();
 
+    const [goods, setGoods] = useState('');
+    useEffect(()=>{
+        getGoods({setGoods})
+    },[])
+
+    function getGoodById(good_id){
+        return goods.find((item)=>{
+
+            if(item.id===good_id){
+
+                return item
+            }
+        })
+    }
     const [shoppingCartState, setShoppingCart] = useState([])
 
     useEffect(()=>{
         getShoppingCart({setShoppingCart}, uid)
     },[])
-
+    function getOrderSum (){
+        let suma = 0
+        shoppingCartState.map((item)=>{
+            suma = suma+getGoodById(item.good_id).price[prod_price]*item.count
+        })
+        return suma
+    }
     // const onSendData = useCallback(() => {
     //     const data = {
     //         name,
@@ -92,9 +109,13 @@ const Form = (props) => {
             address,
             description
             )
-         shoppingCartState.map(item=>deleteShoppingCart(item.id))
+        console.log(uid)
+        shoppingCartState.map(item=>deleteShoppingCart(item.id))
         setFormSuccess(true)
-        router('/successpage')
+        if(formSuccess){
+            router('/successpage')
+        }
+
     }
     function showSubmit() {
         if(name && lastname && phone && address) {
@@ -113,7 +134,7 @@ const Form = (props) => {
     return (
         <div className={"form"}>
             <form>
-            <h3>Введите ваши данные</h3>
+            <h3 style={{textAlign:"center"}}>Введите ваши данные</h3>
             <input
                 className={'input'}
                 type="name"
@@ -161,6 +182,11 @@ const Form = (props) => {
                     <option value="1">Наложеный платеж</option>
                     <option value="2">Предоплата</option>
                 </select>
+
+                <div className={'topay'}>
+                    Сума к оплате: {getOrderSum()}₴
+                </div>
+
                 {showSubmit()}
             </form>
         </div>

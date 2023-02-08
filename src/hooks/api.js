@@ -1,17 +1,25 @@
 import axios from "axios";
 
 
-const base_url = "http://127.0.0.1:8000/" //https://139.162.218.167/"
+const base_url = "http://127.0.0.1:8000/"// "https://139.162.218.167/"
 
 
 
+function sortResude(item) {
+    if (item.residue>0) {
+        return -1;
+    }
+    if(item.residue===0){
+        return 1
+    }
+}
 
 
 export function getGoods(props) {
     axios.get(base_url+'api/v1/goods').then(
 
         response=>{
-            props.setGoods(response.data.data)
+            props.setGoods(response.data.data.sort((item)=>sortResude(item)))
         }
     )
 }

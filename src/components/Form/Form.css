@@ -44,3 +44,9 @@
     border-radius: 10px;
     border: None;
 }
+
+.topay{
+    text-align: center;
+    margin-top: 5vw;
+    color: rgba(19, 189, 50, 1)
+}

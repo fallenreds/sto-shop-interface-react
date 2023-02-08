@@ -37,7 +37,7 @@ export default class SimpleSlider extends Component {
                                 <div className={classes.category_text}>{category.title}</div>
                                 <Slider  {...settings} >
                                     {
-                                        child.map(category => <Category changeCategory={changeCategory} category={category}/>)
+                                        child.map(category => <Category changeCategory={changeCategory} category={category} setSearch={this.props.setSearch}/>)
 
                                     }
 

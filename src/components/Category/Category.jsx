@@ -9,6 +9,7 @@ const Category = (...props) => {
     const categoryId = props[0].category.id
 
     const selectCategory = ()=>{
+        props[0].setSearch('')
         changeCategory(categoryId)
     }
     return (

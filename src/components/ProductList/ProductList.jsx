@@ -17,17 +17,25 @@ const ProductList = (props) => {
     const [categoryState, setCategory] = useState(null)
     const [shoppingCartState, setShoppingCart] = useState(props.shoppingCartState)
     const [goodsState, setGoods] = useState([])
-    // const setGoods = props.setGoods
-    // const goodsState = props.goodsState
-    //
+
     useEffect(()=>{
         getShoppingCart({setShoppingCart}, uid)
-    },[])
+    },[categoryState])
 
     useEffect(()=>{
         getGoods({setGoods})
-    },[])
 
+
+    },[])
+    function textFiltering (searchText) {
+        return goodsState.filter(
+            (item)=>{
+                if(item.title.toLowerCase().includes(searchText.toLowerCase())) {
+                    return item
+                }
+            }
+        )
+    }
 
 
     const cartsGoods = shoppingCartState.filter(item=> item.telegram_id === uid).map(item=>item.good_id)
@@ -47,17 +55,25 @@ const ProductList = (props) => {
     //
     // let filterGoodByCategory = categoryState === null ? data.data: data.data.filter(item=>item.category.id===categoryState)
 
+
     function filterGoodByCategory() {
+        if(props.searchState){
+
+            return textFiltering(props.searchState)
+        }
         if(categoryState === null){
             return goodsState
         }
         return goodsState.filter(item=>item.category.id===categoryState)
+
+
     }
 
-
+    const tg = window.Telegram.WebApp
     return (
         <div className={"form"}>
-            <SimpleSlider category={categoryFilter}/>
+            тут тг: {tg.initdataunsafe?.user?.id}
+            <SimpleSlider category={categoryFilter} setSearch={props.setSearch} />
             <div className={"maintext"}>
                 <h3>{categoryLabel}<button  onClick={restartCategory} style={{background:"none", border: "none"}}>❎</button></h3>
 
