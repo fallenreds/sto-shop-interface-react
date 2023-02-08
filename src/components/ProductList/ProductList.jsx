@@ -31,7 +31,7 @@ const ProductList = (props) => {
         return goodsState.filter(
             (item)=>{
                 if(item.title.toLowerCase().includes(searchText.toLowerCase())) {
-                    return item
+                    return true
                 }
             }
         )
