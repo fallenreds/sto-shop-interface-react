@@ -37,7 +37,7 @@ const ProductList = (props) => {
         )
     }
 
-
+    // eslint-disable-next-line
     const cartsGoods = shoppingCartState.filter(item=> item.telegram_id === uid).map(item=>item.good_id)
 
     function categoryFilter(categoryId) {

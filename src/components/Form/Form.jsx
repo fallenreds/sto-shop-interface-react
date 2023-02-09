@@ -19,7 +19,9 @@ const Form = (props) => {
         getGoods({setGoods})
     },[])
 
+
     function getGoodById(good_id){
+        // eslint-disable-next-line
         return goods.find((item)=>{
 
             if(item.id===good_id){
@@ -32,9 +34,10 @@ const Form = (props) => {
 
     useEffect(()=>{
         getShoppingCart({setShoppingCart}, uid)
-    },[])
+    },[uid])
     function getOrderSum (){
         let suma = 0
+        // eslint-disable-next-line
         shoppingCartState.map((item)=>{
             suma = suma+getGoodById(item.good_id).price[prod_price]*item.count
         })

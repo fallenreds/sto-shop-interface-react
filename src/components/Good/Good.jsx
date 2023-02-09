@@ -30,7 +30,7 @@ const Good = (props) => {
         image ='https://t3.ftcdn.net/jpg/04/34/72/82/360_F_434728286_OWQQvAFoXZLdGHlObozsolNeuSxhpr84.jpg'
     }
 
-
+    // eslint-disable-next-line
     useEffect(()=>{
         if (props.carts.includes(goodState.id)){
             setButton(toShoppingCartButton)
@@ -42,7 +42,7 @@ const Good = (props) => {
             setButton(buyButton)
         }
 
-    },[goodState])
+    },[goodState,props.carts])
 
 
     function addToShoppingCart (){
