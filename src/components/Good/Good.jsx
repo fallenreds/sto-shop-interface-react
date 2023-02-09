@@ -14,11 +14,12 @@ const Good = (props) => {
     const [cartState, setCart] = useState(props.carts)
     const [goodState, setGood] = useState(props.good)
 
+    // eslint-disable-next-line
     useEffect(()=>{
         setGood(props.good)
 
     },[props.good])
-
+    // eslint-disable-next-line
     useEffect(()=>{
         setCart(props.carts)
 
@@ -41,7 +42,7 @@ const Good = (props) => {
         else {
             setButton(buyButton)
         }
-
+    // eslint-disable-next-line
     },[goodState,props.carts])
 
 

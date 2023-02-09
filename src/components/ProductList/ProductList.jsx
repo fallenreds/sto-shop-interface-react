@@ -28,6 +28,7 @@ const ProductList = (props) => {
 
     },[])
     function textFiltering (searchText) {
+        // eslint-disable-next-line
         return goodsState.filter(
             (item)=>{
                 if(item.title.toLowerCase().includes(searchText.toLowerCase())) {
