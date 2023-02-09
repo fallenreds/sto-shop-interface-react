@@ -1,6 +1,7 @@
 import axios from "axios";
 
-
+const https = require('https');
+const httpsAgent = new https.Agent({ rejectUnauthorized: false })
 const base_url =  "https://139.162.218.167/" //"http://127.0.0.1:8000/"
 
 
@@ -16,7 +17,7 @@ function sortResude(item) {
 
 
 export function getGoods(props) {
-    axios.get(base_url+'api/v1/goods').then(
+    axios.get(base_url+'api/v1/goods', { httpsAgent: httpsAgent }).then(
 
         response=>{
             props.setGoods(response.data.data.sort((item)=>sortResude(item)))
@@ -28,7 +29,7 @@ export function getGoods(props) {
 
 export function getShoppingCart(props, telegramId) {
     axios.get(
-        base_url+'api/v1/shoppingcart/'+telegramId)
+        base_url+'api/v1/shoppingcart/'+telegramId, { httpsAgent: httpsAgent })
 
         .then(
         response=>{
@@ -44,7 +45,8 @@ export function postShoppingCart(telegramId, goodId) {
         {
             "telegram_id": telegramId,
             "good_id": goodId,
-        })
+
+        },{ httpsAgent: httpsAgent })
 
         .then(response=>{
         return response.status
@@ -53,7 +55,7 @@ export function postShoppingCart(telegramId, goodId) {
 
 export function deleteShoppingCart(CartId) {
     axios.delete(
-        base_url + 'api/v1/shoppingcart/'+CartId)
+        base_url + 'api/v1/shoppingcart/'+CartId,{ httpsAgent: httpsAgent })
 
         .then(response=>{
         console.log(response.status)
@@ -63,7 +65,7 @@ export function deleteShoppingCart(CartId) {
 export function updateShoppingCart(CartId, count) {
     axios.patch(
         base_url + 'api/v1/shoppingcart/'+CartId,
-        {"count":count})
+        {"count":count},{ httpsAgent: httpsAgent })
 
         .then(response=>{
             console.log(response.status)
@@ -90,7 +92,7 @@ export function postOrder(telegramId,
             "phone": phone,
             "nova_post_address": address,
             "description":description
-        }
+        },{ httpsAgent: httpsAgent }
     )
 
         .then(response=>{
