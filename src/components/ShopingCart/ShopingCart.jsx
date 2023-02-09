@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import classes from "../ShopingCart/ShopingCart.module.css";
 import {deleteShoppingCart, updateShoppingCart} from "../../hooks/api";
 
+// eslint-disable-next-line
 const test_price = 298792
 const prod_price = 284727
 const ShopingCart = (props) => {
