@@ -1,7 +1,7 @@
 import axios from "axios";
 
 
-const base_url = "http://127.0.0.1:8000/"// "https://139.162.218.167/"
+const base_url =  "https://139.162.218.167/" //"http://127.0.0.1:8000/"
 
 
 
