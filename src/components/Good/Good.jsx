@@ -13,7 +13,7 @@ const Good = (props) => {
     const [buttonState, setButton] = useState(buyButton)
     const [cartState, setCart] = useState(props.carts)
     const [goodState, setGood] = useState(props.good)
-
+    console.log(cartState)
     // eslint-disable-next-line
     useEffect(()=>{
         setGood(props.good)
