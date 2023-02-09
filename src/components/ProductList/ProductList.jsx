@@ -68,10 +68,10 @@ const ProductList = (props) => {
 
     }
 
-    const tg = window.Telegram.WebApp
+    //const tg = window.Telegram.WebApp
     return (
         <div className={"form"}>
-            тут тг: {tg.initdataunsafe?.user?.id}
+            тут тг: {uid}
             <SimpleSlider category={categoryFilter} setSearch={props.setSearch} />
             <div className={"maintext"}>
                 <h3>{categoryLabel}<button  onClick={restartCategory} style={{background:"none", border: "none"}}>❎</button></h3>
