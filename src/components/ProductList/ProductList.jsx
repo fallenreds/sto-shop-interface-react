@@ -53,10 +53,6 @@ const ProductList = (props) => {
 
 
 
-    //
-    // let filterGoodByCategory = categoryState === null ? data.data: data.data.filter(item=>item.category.id===categoryState)
-
-
     function filterGoodByCategory() {
         if(props.searchState){
 
@@ -65,6 +61,7 @@ const ProductList = (props) => {
         if(categoryState === null){
             return goodsState
         }
+        // eslint-disable-next-line
         return goodsState.filter(item=>item.category.id===categoryState)
 
 
