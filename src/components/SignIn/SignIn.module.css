@@ -24,29 +24,27 @@
 }
 
 
-.shopping_cart {
-    color: var(--tg-theme-text-color);
-    border-radius: 3px;
-    overflow-y: auto;
-    background: var(--tg-theme-secondary-bg-color);
-    margin-top: 15px;
-    height: 200px ;
-}
 
-.makeOrder{
-    margin-top: 10vw;
-    background: rgba(215, 125, 72, 1);
-    color: var(--tg-theme-text-color);
+.singButton{
+    background-color: rgba(215, 125, 72, 1);
     font-family: 'Montserrat';
     font-weight: bold;
-    width: 100%;
+    width: 48%;
     padding: 3vw;
     border-radius: 10px;
     border: None;
 }
 
 .topay{
+    font-weight: bold;
     text-align: center;
     margin-top: 5vw;
     color: rgba(19, 189, 50, 1)
+}
+
+.buttonList{
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 10px;
+    justify-content: space-between;
 }

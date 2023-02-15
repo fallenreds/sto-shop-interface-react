@@ -1,12 +1,10 @@
 import axios from "axios";
-
-const https = require('https');
-const httpsAgent = new https.Agent({ rejectUnauthorized: false })
-const base_url =  "https://139.162.218.167/" //"http://127.0.0.1:8000/"
+import {base_url} from "../App";
 
 
 
 function sortResude(item) {
+
     if (item.residue>0) {
         return -1;
     }
@@ -15,9 +13,8 @@ function sortResude(item) {
     }
 }
 
-
 export function getGoods(props) {
-    axios.get(base_url+'api/v1/goods', { httpsAgent: httpsAgent }).then(
+    axios.get(base_url+'api/v1/goods').then(
 
         response=>{
             props.setGoods(response.data.data.sort((item)=>sortResude(item)))
@@ -29,7 +26,7 @@ export function getGoods(props) {
 
 export function getShoppingCart(props, telegramId) {
     axios.get(
-        base_url+'api/v1/shoppingcart/'+telegramId, { httpsAgent: httpsAgent })
+        base_url+'api/v1/shoppingcart/'+telegramId)
 
         .then(
         response=>{
@@ -46,7 +43,7 @@ export function postShoppingCart(telegramId, goodId) {
             "telegram_id": telegramId,
             "good_id": goodId,
 
-        },{ httpsAgent: httpsAgent })
+        })
 
         .then(response=>{
         return response.status
@@ -55,7 +52,7 @@ export function postShoppingCart(telegramId, goodId) {
 
 export function deleteShoppingCart(CartId) {
     axios.delete(
-        base_url + 'api/v1/shoppingcart/'+CartId,{ httpsAgent: httpsAgent })
+        base_url + 'api/v1/shoppingcart/'+CartId)
 
         .then(response=>{
         console.log(response.status)
@@ -65,7 +62,7 @@ export function deleteShoppingCart(CartId) {
 export function updateShoppingCart(CartId, count) {
     axios.patch(
         base_url + 'api/v1/shoppingcart/'+CartId,
-        {"count":count},{ httpsAgent: httpsAgent })
+        {"count":count})
 
         .then(response=>{
             console.log(response.status)
@@ -92,10 +89,102 @@ export function postOrder(telegramId,
             "phone": phone,
             "nova_post_address": address,
             "description":description
-        },{ httpsAgent: httpsAgent }
+        }
     )
 
         .then(response=>{
             return response.status
         })
+}
+
+export function getOrderSuma(props, uid) {
+    axios.get(base_url+"api/v1/ordersuma/"+uid).then(
+        response=>{
+            props.setOrderSuma(response.data)
+        }
+    )
+}
+
+export function checkFreeLogin(props,login) {
+    axios.get(base_url+"api/v1/checkfreelogin/"+login).then(
+        response=>{
+           props.setIsFreeLogin(response.data)
+        }
+    )
+}
+
+export function postClient(uid,
+                          name,
+                          lastName,
+                          login,
+                          password,
+                          phone,
+
+) {
+    axios.post(
+        base_url + 'api/v1/singup/',
+        {
+            "telegram_id": uid,
+            "name": name,
+            "last_name": lastName,
+            "login": login,
+            "password": password,
+            "phone": phone
+        }
+    )
+
+        .then(response=>{
+            return response.status
+        })
+}
+
+export function checkAuthenticated(props, uid) {
+    axios.get(base_url+"api/v1/isauthendicated/"+uid).then(
+        response=>{
+            if(response.data.success){
+                props.setAuthenticated(true)
+                props.setClient(response.data)
+            }
+            else {
+                props.setAuthenticated(false)
+                props.setClient({})
+            }
+
+        }
+    )
+}
+
+export function checkAuth(props) {
+    return axios.get(base_url+"api/v1/isauthendicated/"+props.uid).then(
+        response=>{
+            if(response.data.success){
+                return {
+                    status: true,
+                    client_data: response.data
+                }
+
+            }
+            else {
+                return {
+                    status: false,
+                    client_data: {}
+                }
+            }
+        }
+    )
+}
+
+export function logIn(login, password, telegramId) {
+    return axios.post(
+        base_url + 'api/v1/signin/',
+        {
+            "login": login,
+            "password": password,
+            "telegram_id": telegramId
+        }
+    )
+}
+
+export function get_discount(client_id) {
+    return axios.get(base_url+"api/v1/monthdiscount/"+client_id)
 }

@@ -1,0 +1,11 @@
+{
+  "test_settings": {
+    "base_url": "http://127.0.0.1:8000/",
+
+    "prod_price": 284727
+  },
+  "prod_settings": {
+    "base_url": "https://stoshop.co.ua/",
+    "prod_price": 284727
+  }
+}

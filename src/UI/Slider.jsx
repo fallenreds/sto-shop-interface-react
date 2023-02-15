@@ -9,13 +9,13 @@ export default class SimpleSlider extends Component {
     render() {
         const settings = {
             arrows: false,
-            variableWidth: true,
+
             dots: true,
             infinite: false,
-            speed: 500,
             swipeToSlide: true,
-            pauseOnDotsHover: true,
-            slidesToScroll: 1
+           // pauseOnDotsHover: true,
+            slidesToScroll: 1,
+            slidesToShow:3
         };
 
         const changeCategory = this.props.category

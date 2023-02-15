@@ -1,11 +1,22 @@
-import React, {useEffect, useState} from 'react';
-import './Form.css';
-import {deleteShoppingCart, getGoods, getShoppingCart, postOrder} from "../../hooks/api";
+import React, {useCallback, useEffect, useState} from 'react';
+import './Form.module.css';
+import {useTelegram} from "../../hooks/useTelegram";
+import ShopingCartList from "../ShopingCartList/ShopingCartList";
+import {
+    checkAuth,
+    checkAuthenticated,
+    deleteShoppingCart, get_discount,
+    getOrderSuma,
+    getShoppingCart,
+    postOrder
+} from "../../hooks/api";
 import {useNavigate} from "react-router-dom";
-const prod_price = 284727
-const Form = (props) => {
-    let uid = props.uid
+import classes from "./Form.module.css";
 
+
+const Form = (props) => {
+
+    let uid = props.uid
     const [name, setName] = useState('');
     const [lastname, setLastName] = useState('');
     const [phone, setPhone] = useState('');
@@ -13,68 +24,57 @@ const Form = (props) => {
     const [prepayment, setPrepayment] = useState(false);
     const [description, setDescription] = useState('');
     const [formSuccess, setFormSuccess] = useState(false);
-
-    const [goods, setGoods] = useState('');
+    const {tg} = useTelegram();
+    const router = useNavigate()
+    const [authenticated, setAuthenticated] = useState()
+    const [client, setClient] = useState()
+    const [discount, setDiscount] = useState(0)
     useEffect(()=>{
-        getGoods({setGoods})
+        checkAuth({uid}).then(
+            response=>{
+                if(response.status===true){
+
+                    setAuthenticated(true)
+                    setClient(response.client_data)
+                }
+            }
+        )
     },[])
 
+    useEffect(()=>{
+        checkAuth({uid}).then(
+            response=>{
+                if(response.status===false){
+                    router('/singup')
+                }
 
-    function getGoodById(good_id){
-        // eslint-disable-next-line
-        return goods.find((item)=>{
-
-            if(item.id===good_id){
-
-                return true
             }
-        })
+        )
+    },[])
+
+    if(authenticated===true && client){
+        get_discount(client.id).then(
+            response=>{
+                if(response.data.success===true){
+                    setDiscount(response.data.data.procent)
+                    //return <div>Вам доступна знижка у розмірі {response.data.data.procent}%</div>
+                }
+            }
+        )
     }
+
+
     const [shoppingCartState, setShoppingCart] = useState([])
 
     useEffect(()=>{
         getShoppingCart({setShoppingCart}, uid)
-    },[uid])
-    function getOrderSum (){
-        let suma = 0
-        // eslint-disable-next-line
-        shoppingCartState.map((item)=>{
-            suma = suma+getGoodById(item.good_id).price[prod_price]*item.count
-        })
-        return suma
-    }
-    // const onSendData = useCallback(() => {
-    //     const data = {
-    //         name,
-    //         lastname,
-    //         phone,
-    //         address,
-    //         prepayment,
-    //
-    //     }
-    //     tg.sendData(JSON.stringify(data));
-    // }, [address, lastname, name, phone, tg])
-    //
-    // useEffect(() => {
-    //     tg.onEvent('mainButtonClicked', onSendData)
-    //     return () => {
-    //         tg.offEvent('mainButtonClicked', onSendData)
-    //     }
-    // }, [onSendData, tg])
+    },[])
 
-    // useEffect(() => {
-    //     tg.MainButton.setParams({
-    //         text: 'Отправить данные'
-    //     })
-    // }, [tg.MainButton])
-    //
-    // useEffect(() => {
-    //     if(!name || !lastname || !phone || !address) {
-    //         tg.MainButton.hide();
-    //     } else {
-    //         tg.MainButton.show();
-    //     }
-    // }, [name, lastname, phone, address, tg.MainButton])
+    const [orderSumaState, setOrderSuma] = useState(0)
+    useEffect(()=>{
+        getOrderSuma({setOrderSuma},uid)
+    },[])
+
 
     const onChangeName = (e) => {
         setName(e.target.value)
@@ -101,9 +101,9 @@ const Form = (props) => {
             setPrepayment(true)
         }
     }
-    const router = useNavigate()
+
     function create_order() {
-         postOrder(props.uid,
+        postOrder(props.uid,
             shoppingCartState,
             name,
             lastname,
@@ -111,18 +111,14 @@ const Form = (props) => {
             phone,
             address,
             description
-            )
-        console.log(uid)
+        )
         shoppingCartState.map(item=>deleteShoppingCart(item.id))
         setFormSuccess(true)
-        if(formSuccess){
-            router('/successpage')
-        }
-
+        router('/successpage')
     }
     function showSubmit() {
         if(name && lastname && phone && address) {
-            return   <button onClick={create_order} className={'makeOrder'}>Оформить заказ</button>
+            return   <button type={"submit"} className={classes.makeOrder}>Оформити замовлення</button>
         }
     }
 
@@ -135,61 +131,58 @@ const Form = (props) => {
     // }
 
     return (
-        <div className={"form"}>
-            <form>
-            <h3 style={{textAlign:"center"}}>Введите ваши данные</h3>
-            <input
-                className={'input'}
-                type="name"
-                placeholder={'Имя'}
-                value={name}
-                onChange={onChangeName}
-                required
-            />
-            <input
-                className={'input'}
-                type="text"
-                placeholder={'Фамилия'}
-                value={lastname}
-                onChange={onChangeLastName}
-                required
-            />
-            <input
-                className={'input'}
-                id="phone"
-                name="phone"
-                pattern="^\+?3?8?(0\d{9})$"
-                type="tel"
-                placeholder={'Номер телефона +380'}
-                value={phone}
-                onChange={onChangePhone}
-                required
-            />
-            <input
-                className={'input'}
-                type="text"
-                placeholder={'Адресс, отделение Новой Почты'}
-                value={address}
-                onChange={onChangeAddress}
-                required
-            />
+        <div className={classes.form}>
+            <form onSubmit={create_order}>
+                <h3 style={{textAlign:"center"}}>Будь ласка, введіть ваші дані</h3>
+                    <input
+                        className={classes.input}
+                        type="name"
+                        placeholder={"Ім'я"}
+                        value={name}
+                        onChange={onChangeName}
+                        required
+                    />
+                    <input
+                        className={classes.input}
+                        type="text"
+                        placeholder={'Прізвище'}
+                        value={lastname}
+                        onChange={onChangeLastName}
+                        required
+                    />
+                    <input
+                        className={classes.input}
+                        id="phone"
+                        name="phone"
+                        pattern="^\+?3?8?(0\d{9})$"
+                        type="tel"
+                        placeholder={'Номер телефону +380'}
+                        value={phone}
+                        onChange={onChangePhone}
+                        required
+                    />
                 <input
-                    className={'input'}
+                    className={classes.input}
                     type="text"
-                    placeholder={'Комментрарий к отправке'}
-                    value={description}
-                    onChange={onChangeDescription}
+                    placeholder={'Адреса, відділення Нової Пошти'}
+                   // placeholder={'Адресс, отделение Новой Почты'}
+                    value={address}
+                    onChange={onChangeAddress}
                     required
                 />
-                <select className={'input'} name="prepayment" onChange={onChangePrepayment}>
-                    <option value="1">Наложеный платеж</option>
-                    <option value="2">Предоплата</option>
+                <input
+                    className={classes.input}
+                    type="text"
+                    placeholder={'Коментар до відправки'}
+                   // placeholder={'Комментрарий к отправке'}
+                    value={description}
+                    onChange={onChangeDescription}
+                />
+                <select className={classes.input} name="prepayment" onChange={onChangePrepayment}>
+                    <option value="1">Накладений платіж</option>
+                    <option value="2">Передплата</option>
                 </select>
-
-                <div className={'topay'}>
-                    Сума к оплате: {getOrderSum()}₴
-                </div>
-
+                <div className={classes.topay}>Сума до сплати: {orderSumaState-orderSumaState/100*discount}грн</div>
                 {showSubmit()}
             </form>
         </div>

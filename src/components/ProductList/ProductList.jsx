@@ -1,9 +1,10 @@
-import './ProductList.css';
+import './ProductList.module.css';
 import category from "../../category.json";
 import Good from "../Good/Good";
 import SimpleSlider from "../../UI/Slider";
 import {useEffect, useState} from "react";
-import {getGoods, getShoppingCart} from "../../hooks/api";
+import {checkAuth, checkAuthenticated, getGoods, getShoppingCart} from "../../hooks/api";
+import classes from "./ProductList.module.css";
 
 
 
@@ -11,12 +12,15 @@ import {getGoods, getShoppingCart} from "../../hooks/api";
 
 
 const ProductList = (props) => {
-    const uid = props.uid
 
+    const uid = props.uid
 
     const [categoryState, setCategory] = useState(null)
     const [shoppingCartState, setShoppingCart] = useState(props.shoppingCartState)
     const [goodsState, setGoods] = useState([])
+    const [authenticated, setAuthenticated] = useState()
+    const [client, setClient] = useState()
+
 
     useEffect(()=>{
         getShoppingCart({setShoppingCart}, uid)
@@ -24,9 +28,34 @@ const ProductList = (props) => {
 
     useEffect(()=>{
         getGoods({setGoods})
-
-
     },[])
+
+
+
+    useEffect(()=>{
+        checkAuth({uid}).then(
+            response=>{
+                if(response.status===true){
+
+                    setAuthenticated(true)
+                    setClient(response.client_data)
+                }
+            }
+        )
+    },[])
+
+
+
+    function showClientInfo(){
+        if(authenticated===true){
+            return <div style={{marginTop:"45px", fontSize:"18px", fontFamily:"Montserrat", textAlign:"center"}}>
+                Ласкаво просимо, {client.name} {client.last_name}
+            </div>
+        }
+    }
+
+
+
     function textFiltering (searchText) {
         // eslint-disable-next-line
         return goodsState.filter(
@@ -49,7 +78,7 @@ const ProductList = (props) => {
         categoryFilter(null)
     }
 
-    let categoryLabel = categoryState === null ? "Все товары":
+    let categoryLabel = categoryState === null ? "Усі товари ":
                         category.data.find(item=>item.id === categoryState).title
 
 
@@ -70,16 +99,15 @@ const ProductList = (props) => {
 
     //const tg = window.Telegram.WebApp
     return (
-        <div className={"form"}>
-            тут тг: {uid}
+        <div className={classes.form}>
+            {showClientInfo()}
             <SimpleSlider category={categoryFilter} setSearch={props.setSearch} />
-            <div className={"maintext"}>
+            <div className={classes.maintext}>
                 <h3>{categoryLabel}<button  onClick={restartCategory} style={{background:"none", border: "none"}}>❎</button></h3>
 
             </div>
 
-            <div className={"postlist"}> 
-
+            <div className={classes.postlist}>
                 {filterGoodByCategory().map(good=> <Good
                         good={good} carts={cartsGoods} uid={uid}
                         />

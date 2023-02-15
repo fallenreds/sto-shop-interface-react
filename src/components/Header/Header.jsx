@@ -20,7 +20,7 @@ const Header = (props) => {
             <input
                 className={classes.input}
                 type="text"
-                placeholder={'Поиск'}
+                placeholder={'Пошук'}
                 defaultValue=''
                 onChange={onSearch}
                 value={props.searchState}

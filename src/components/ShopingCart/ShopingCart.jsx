@@ -1,6 +1,6 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import classes from "../ShopingCart/ShopingCart.module.css";
-import {deleteShoppingCart, updateShoppingCart} from "../../hooks/api";
+import {deleteShoppingCart, getOrderSuma, updateShoppingCart} from "../../hooks/api";
 
 // eslint-disable-next-line
 const test_price = 298792
@@ -9,9 +9,17 @@ const ShopingCart = (props) => {
 
     const [count, setCount] = useState(props.cart.count);
     const good = props.goodsState.filter(item=>item.id===props.cart.good_id)[0]
+    const [price, setPrice] = useState(good.price[prod_price]*count);
     let cart_id = props.cart.id
 
+    useEffect(()=>{
+        setPrice()
+    })
+    function updateSuma(){
+        getOrderSuma(props,props.uid)
+    }
     function deleteCart(){
+        props.setOrderSuma(props.orderSumaState-good.price[prod_price]*count)
         deleteShoppingCart(cart_id)
         props.removeCart(cart_id)
     }
@@ -20,12 +28,15 @@ const ShopingCart = (props) => {
         if(count+1 <= good.residue){
             setCount(count+1)
             updateShoppingCart(cart_id, count+1)
+
+            props.setOrderSuma(props.orderSumaState+good.price[prod_price])
         }
     }
     function decrementCount() {
         if(count-1>0){
             setCount(count-1)
             updateShoppingCart(cart_id, count-1)
+            props.setOrderSuma (props.orderSumaState-good.price[prod_price])
         }
 
     }
@@ -47,12 +58,12 @@ const ShopingCart = (props) => {
                     <span>{count}</span>
                     <button onClick={incrementCount}>+</button>
                 </div>
-                <div >В наличии: {good.residue}</div>
+                <div >В наявності: {good.residue} шт</div>
 
                 <div className={classes.finalprice}>
 
                     <div className={classes.finaltext}>
-                        К оплате:
+                        До сплати:
                     </div>
 
                     {good.price[prod_price]*count} ₴
@@ -62,7 +73,7 @@ const ShopingCart = (props) => {
                 style={{color: "red", marginLeft: "auto", marginBottom:"auto", background:"None", border: "None"}}
                 onClick={deleteCart}
                 >
-                Удалить
+                Видалити
                 </button>
         </div>
     );
