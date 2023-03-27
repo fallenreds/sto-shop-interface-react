@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import classes from './Good.module.css'
-import {postShoppingCart} from "../../hooks/api";
+import {get_discount, postShoppingCart} from "../../hooks/api";
 import {useNavigate} from "react-router-dom";
 
 
@@ -56,7 +56,14 @@ const Good = (props) => {
     return (
         <div className={classes.post}>
 
-            <img alt='Фото' src={image }/>
+            <div className={classes.imageContainer}>
+
+                <img className={classes.blurIMG} alt='Фото' src={image}/>
+                <img className={classes.finalIMG} alt='Фото' src={image}/>
+
+            </div>
+
+
 
             <div className={classes.title}>
                 {goodState.title}<p/>

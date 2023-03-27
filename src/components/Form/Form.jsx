@@ -133,7 +133,7 @@ const Form = (props) => {
     return (
         <div className={classes.form}>
             <form onSubmit={create_order}>
-                <h3 style={{textAlign:"center"}}>Будь ласка, введіть ваші дані</h3>
+                <h3 style={{textAlign:"center"}}>Будь ласка, введіть ваші дані для відправки вашого замовлення ✍️</h3>
                     <input
                         className={classes.input}
                         type="name"
@@ -178,13 +178,14 @@ const Form = (props) => {
                     value={description}
                     onChange={onChangeDescription}
                 />
-                <select className={classes.input} name="prepayment" onChange={onChangePrepayment}>
+                <select className={classes.select} name="prepayment" onChange={onChangePrepayment}>
                     <option value="1">Накладений платіж</option>
                     <option value="2">Передплата</option>
                 </select>
                 <div className={classes.topay}>Сума до сплати: {orderSumaState-orderSumaState/100*discount}грн</div>
                 {showSubmit()}
             </form>
+            <div className={classes.fakeblock}></div>
         </div>
     );
 };

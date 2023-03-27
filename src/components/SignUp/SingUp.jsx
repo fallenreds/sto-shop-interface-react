@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {useNavigate} from "react-router-dom";
 import classes from "./SignUp.module.css";
-import {checkAuth, checkAuthenticated, checkFreeLogin, postClient} from "../../hooks/api";
+import {checkAuth, checkAuthenticated, checkFreeLogin, checkFreePhone, postClient} from "../../hooks/api";
 
 const SingUp = (props) => {
     const router = useNavigate()
@@ -21,6 +21,7 @@ const SingUp = (props) => {
 
     const  [isValidForm, setIsValidForm] = useState(false);
     const  [isFreeLogin, setIsFreeLogin] = useState(true);
+    const  [isFreePhone, setIsFreePhone] = useState(true);
 
 
     useEffect(()=>{
@@ -45,6 +46,10 @@ const SingUp = (props) => {
         checkFreeLogin({setIsFreeLogin},login)
     },[login])
 
+    useEffect(()=>{
+        checkFreePhone({setIsFreePhone}, phone)
+    },[phone])
+
 
     function goToSingIn(){
         router("/singin")
@@ -59,8 +64,11 @@ const SingUp = (props) => {
     }
     const onChangePhone = (e) => {
         setPhone(e.target.value)
-        let re = new RegExp("^\\+?3?8?(0\\d{9})");
 
+        let re = new RegExp("^\\+38(0\\d{9})");
+        if(e.target.length>9){
+            checkFreePhone({setIsFreePhone}, phone)
+        }
         if(e.target.value ===''){
             setPhoneError("")
         }
@@ -74,7 +82,8 @@ const SingUp = (props) => {
 
     const onChangeLogin = (e) => {
         checkFreeLogin({setIsFreeLogin},e.target.value)
-        let re = new RegExp("^(?=.*[A-Za-z])(?=.*\\d)(?=.*[@$!%*_#?&])[A-Za-z\\d@$!%_*#?&]{6,}");
+        let re = new RegExp("^[A-Za-z\\d@$!%_*#?&]{6,}");
+        // let re = new RegExp("^(?=.*[A-Za-z])(?=.*\\d)(?=.*[@$!%*_#?&])[A-Za-z\\d@$!%_*#?&]{6,}");
         setLogin(e.target.value)
 
         if(e.target.value ===''){
@@ -83,9 +92,9 @@ const SingUp = (props) => {
         else if(e.target.value.length <6 || e.target.value.length >18){
             setLoginError("Довжина логіна повинна бути від 6 до 18 символів.")
         }
-        else if(!re.test(e.target.value)){
-            setLoginError("Мінімум шість символів, мінімум одна літера, одна цифра та один спеціальний символ:")
-        }
+        // else if(!re.test(e.target.value)){
+        //     setLoginError("Мінімум шість символів, мінімум одна літера, одна цифра та один спеціальний символ:")
+        // }
         else {
             setLoginError("")
         }
@@ -106,7 +115,8 @@ const SingUp = (props) => {
     }
 
     const onChangePassword = (e) => {
-        let re = new RegExp("^(?=.*[A-Za-z])(?=.*\\d)(?=.*[@$!%_*#?&])[A-Za-z\\d@$!%_*#?&]{6,}");
+        // let re = new RegExp("^(?=.*[A-Za-z])(?=.*\\d)(?=.*[@$!%_*#?&])[A-Za-z\\d@$!%_*#?&]{6,}");
+        let re = new RegExp("^[A-Za-z\\d@$!%_*#?&]{6,}");
         setPassword(e.target.value)
 
         if(e.target.value ===''){
@@ -121,19 +131,27 @@ const SingUp = (props) => {
     }
     
     function finalAction() {
-        router('/shcart')
+       // router('/shcart')
+        router('/SuccessAuth')
+
     }
 
-    
+
+
     function submitForm(event) {
         event.preventDefault()
-        checkFreeLogin({setIsFreeLogin},login)
-        if(isFreeLogin){
+        checkFreeLogin({setIsFreeLogin}, login)
+        checkFreePhone({setIsFreePhone}, phone)
+
+        if(isFreeLogin && isFreePhone){
             postClient(uid, name, lastname, login, password, phone)
             finalAction()
         }
-        else {
-            setLoginError("Такий користувач вже існує")
+        if(isFreeLogin===false){
+            setLoginError("Клієнт з таким логіном вже творений, оберіть інший логін, або увійдіть в аккаунт")
+        }
+        if(isFreePhone===false){
+            setPhoneError("Телефон повинен бути унікальний для кожного клієнта. Якщо ви вже реєструвались за цим номером, будь ласка, увійдіть у аккаунт.")
         }
     }
 
@@ -184,7 +202,7 @@ const SingUp = (props) => {
                     type="text"
                     placeholder={'Логін'}
                     value={login}
-                    minLength={8}
+                    minLength={6}
                     onChange={onChangeLogin}
                     required
                 />
@@ -196,7 +214,7 @@ const SingUp = (props) => {
                     type="password"
                     placeholder={'Пароль'}
                     value={password}
-                    minLength={8}
+                    minLength={6}
                     onChange={onChangePassword}
                     required
                 />
@@ -208,7 +226,7 @@ const SingUp = (props) => {
                     type="password"
                     placeholder={'Повторіть пароль'}
                     value={passwordAccept}
-                    minLength={8}
+                    minLength={6}
                     onChange={onChangePasswordAccept}
                     required
                 />
@@ -227,7 +245,7 @@ const SingUp = (props) => {
                 </div>
 
             </form>
-
+            <div className={classes.fakeblock}></div>
         </div>
     );
 };

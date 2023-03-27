@@ -49,7 +49,15 @@ const ShopingCart = (props) => {
     }
     return (
         <div className={classes.shoppingCart}>
-            <img src={image} alt='asdadfas'/>
+            <div className={classes.imageContainer}>
+
+                <img className={classes.blurIMG} alt='Фото' src={image}/>
+                <img className={classes.finalIMG} alt='Фото' src={image}/>
+
+            </div>
+            <div className={classes.content}>
+
+
             <div className={classes.info}>
                 <div className={classes.maintext}>{good.title}</div>
                 <div className={classes.price}>{good.price[284727]}₴</div>
@@ -69,12 +77,14 @@ const ShopingCart = (props) => {
                     {good.price[prod_price]*count} ₴
                 </div>
             </div>
+            </div>
+
             <button
                 style={{color: "red", marginLeft: "auto", marginBottom:"auto", background:"None", border: "None"}}
                 onClick={deleteCart}
-                >
+            >
                 Видалити
-                </button>
+            </button>
         </div>
     );
 };

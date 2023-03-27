@@ -1,6 +1,7 @@
 import axios from "axios";
-import {base_url} from "../App";
 
+import {base_url} from "../App";
+import {bonus_id} from "../App";
 
 
 function sortResude(item) {
@@ -17,7 +18,7 @@ export function getGoods(props) {
     axios.get(base_url+'api/v1/goods').then(
 
         response=>{
-            props.setGoods(response.data.data.sort((item)=>sortResude(item)))
+            props.setGoods(response.data.data.sort((item)=>sortResude(item)).filter(item=> item.id!==bonus_id))
         }
     )
 }
@@ -111,6 +112,15 @@ export function checkFreeLogin(props,login) {
            props.setIsFreeLogin(response.data)
         }
     )
+}
+
+export function checkFreePhone(props, phone) {
+    axios.get(base_url+"api/v1/checkfreephone/"+phone).then(
+        response=>{
+            props.setIsFreePhone(response.data)
+        }
+    )
+
 }
 
 export function postClient(uid,

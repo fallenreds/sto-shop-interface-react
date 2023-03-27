@@ -11,13 +11,13 @@ const Category = (...props) => {
     const selectCategory = ()=>{
         props[0].setSearch('')
         changeCategory(categoryId)
+
     }
     return (
-        <div  onClick={selectCategory} className={classes.category}>
+        <a href={"#section1"} style={{textDecoration:"none", color: "var(--tg-theme-text-color)", fontWeight:"bold"}}><div  onClick={selectCategory} className={classes.category}>
             <img src={rq} alt ='img' />
             {props[0].category.title}
-
-        </div>
+        </div></a>
     );
 };
 

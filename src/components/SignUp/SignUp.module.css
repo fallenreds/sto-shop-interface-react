@@ -7,9 +7,11 @@
     font-family: 'Montserrat';
     font-weight: bold;
     background-color: var(--tg-theme-bg-color);
+
 }
 
 .input {
+    font-size: 16px;
     border-radius: 10px;
     width: 100%;
     padding: 10px;
@@ -19,11 +21,14 @@
 }
 
 .select {
+    font-size: 16px;
     padding: 10px;
     margin-top: 15px;
 }
 
-
+.fakeblock{
+    padding-top: 450px;
+}
 
 .singButton{
     background-color: rgba(215, 125, 72, 1);

@@ -62,6 +62,7 @@ const ShopingCartList = (props) => {
         get_discount(client.id).then(
             response=>{
                 if(response.data.success===true){
+                    console.log(response.data)
                     setDiscount(response.data.data.procent)
                     //return <div>Вам доступна знижка у розмірі {response.data.data.procent}%</div>
                 }

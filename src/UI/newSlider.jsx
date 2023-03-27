@@ -1,33 +1,47 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
+import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
+
+import category_data from "../category.json";
+import classes from "./slider.module.css";
 import Slider from "react-slick";
 import Category from "../components/Category/Category";
-import category_data from '../category.json'
-import classes from './slider.module.css'
-
-export default class SimpleSlider extends Component {
+import Carousel from "react-multi-carousel";
+import "react-multi-carousel/lib/styles.css";
+const responsive = {
+    superLargeDesktop: {
+        // the naming can be any, depends on you.
+        breakpoint: { max: 4000, min: 3000 },
+        items: 5
+    },
+    desktop: {
+        breakpoint: { max: 3000, min: 1024 },
+        items: 5
+    },
+    tablet: {
+        breakpoint: { max: 1024, min: 464 },
+        items: 3
+    },
+    mobile: {
+        breakpoint: { max: 464, min: 0 },
+        items: 3
+    }
+};
+export default class DemoCarousel extends Component {
 
     render() {
+        const changeCategory = this.props.category
         const settings = {
-            arrows: false,
-            transition: false,
-            dots: true,
-            infinite: false,
-            swipeToSlide: true,
-           // pauseOnDotsHover: true,
-            slidesToScroll: 1,
-            slidesToShow:3,
+            showDots:true,
+            arrows:false,
+            minimumTouchDrag:1,
             swipeable: true
         };
-
-        const changeCategory = this.props.category
-
         function get_сhildrens (parent_id) {
             return category_data.data.filter((ct)=>ct.parent_id === parent_id)
         }
 
-
         return (
-
             <div className={classes.upslider}>
                 {category_data.data.map(category => {
                     if(category.parent_id === undefined) {
@@ -36,13 +50,13 @@ export default class SimpleSlider extends Component {
 
                             <div className={classes.nodots}>
                                 <div className={classes.category_text}>{category.title}</div>
-                                <Slider  {...settings} >
+                                <Carousel  {...settings} responsive={responsive}>
                                     {
                                         child.map(category => <Category changeCategory={changeCategory} category={category} setSearch={this.props.setSearch}/>)
 
                                     }
 
-                                </Slider>
+                                </Carousel>
                             </div>
 
 
@@ -53,7 +67,7 @@ export default class SimpleSlider extends Component {
                     }
                 })}
             </div>
-
         );
     }
 }
+

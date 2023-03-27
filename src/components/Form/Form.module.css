@@ -10,18 +10,47 @@
 }
 
 .input {
+    font-size: 16px;
     border-radius: 10px;
     width: 100%;
     padding: 10px;
     color: var(--tg-theme-text-color);
     background-color: var(--tg-theme-secondary-bg-color);
     margin-top: 15px;
+    -webkit-appearance: none;
+    border: 1px solid black;
 }
 
-.select {
+.select{
+    font-size: 16px;
+    border-radius: 10px;
+    width: 100%;
     padding: 10px;
+
+    color: var(--tg-theme-text-color);
+    background-color: var(--tg-theme-secondary-bg-color);
     margin-top: 15px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border: 1px solid black;
+    background-image: url("down-arrow.svg");
+    background-position: right;
+    background-repeat: no-repeat;
+    background-size: 5%;
+    background-origin: content-box;
+
+
 }
+
+/*.input > select{*/
+/*    color: #1c800b;*/
+/*}*/
+
+/*.select {*/
+/*    padding: 10px;*/
+/*    margin-top: 15px;*/
+/*}*/
 
 
 .shopping_cart {
@@ -51,7 +80,9 @@
     margin-top: 5vw;
     color: rgba(19, 189, 50, 1)
 }
-
+.fakeblock{
+    padding-top: 450px;
+}
 .button{
     background: rgba(215, 125, 72, 1);
     color: var(--tg-theme-text-color);

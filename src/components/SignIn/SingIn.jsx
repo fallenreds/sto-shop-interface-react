@@ -21,7 +21,7 @@ const SingIn = (props) => {
         checkAuth({uid}).then(
             response=>{
                 if(response.status===true){
-                    router(-1)
+                    router('/SuccessAuth')
                 }
             }
         )
@@ -40,7 +40,8 @@ const SingIn = (props) => {
     })
 
     const onChangeLogin = (e) => {
-        let re = new RegExp("^(?=.*[A-Za-z])(?=.*\\d)(?=.*[@$!%*_#?&])[A-Za-z\\d@$!%_*#?&]{6,}");
+        let re = new RegExp("^[A-Za-z\\d@$!%_*#?&]{6,}");
+        //let re = new RegExp("^(?=.*[A-Za-z])(?=.*\\d)(?=.*[@$!%*_#?&])[A-Za-z\\d@$!%_*#?&]{6,}");
         setLogin(e.target.value)
 
         if(e.target.value ===''){
@@ -49,9 +50,9 @@ const SingIn = (props) => {
         else if(e.target.value.length <6 || e.target.value.length >18){
             setLoginError("Довжина логіна повинна бути від 6-ти до 18-ти символів.")
         }
-        else if(!re.test(e.target.value)){
-            setLoginError("Мінімум шість символів, мінімум одна літера, одна цифра та один спеціальний символ:")
-        }
+        // else if(!re.test(e.target.value)){
+        //     setLoginError("Мінімум шість символів, мінімум одна літера, одна цифра та один спеціальний символ:")
+        // }
         else {
             setLoginError("")
 
@@ -60,7 +61,8 @@ const SingIn = (props) => {
 
 
     const onChangePassword = (e) => {
-        let re = new RegExp("^(?=.*[A-Za-z])(?=.*\\d)(?=.*[@$!%_*#?&])[A-Za-z\\d@$!%_*#?&]{6,}");
+        let re = new RegExp("^[A-Za-z\\d@$!%_*#?&]{6,}");
+       // let re = new RegExp("^(?=.*[A-Za-z])(?=.*\\d)(?=.*[@$!%_*#?&])[A-Za-z\\d@$!%_*#?&]{6,}");
         setPassword(e.target.value)
 
         if(e.target.value ===''){
@@ -81,8 +83,8 @@ const SingIn = (props) => {
 
         if(!isFreeLogin){
             logIn(login,password,uid).then(response=>{
-                if(response.data.success==='true'){
-                    router(-1)
+                if(response.data.success===true){
+                    router("/shcart")
                 }
                 if(response.data.detail==="client not found"){
                     setLoginError("Клієнта не знайдено")
@@ -112,7 +114,7 @@ const SingIn = (props) => {
                     type="text"
                     placeholder={'Логін'}
                     value={login}
-                    minLength={8}
+                    minLength={6}
                     onChange={onChangeLogin}
                     required
                 />
@@ -124,7 +126,7 @@ const SingIn = (props) => {
                     type="password"
                     placeholder={'Пароль'}
                     value={password}
-                    minLength={8}
+                    minLength={6}
                     onChange={onChangePassword}
                     required
                 />
@@ -142,7 +144,7 @@ const SingIn = (props) => {
                 </div>
 
             </form>
-
+            <div className={classes.fakeblock}></div>
         </div>
     );
 };

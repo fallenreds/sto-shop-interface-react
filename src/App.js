@@ -1,7 +1,7 @@
 import './App.css';
 import {useEffect, useState} from "react";
 import Header from "./components/Header/Header";
-import {Route, Routes} from "react-router-dom";
+import {Route, Routes, useNavigate} from "react-router-dom";
 import ProductList from "./components/ProductList/ProductList";
 import Form from "./components/Form/Form";
 import ShopingCartList from "./components/ShopingCartList/ShopingCartList";
@@ -10,10 +10,12 @@ import SuccessPage from "./components/SuccessPage/SuccessPage";
 import SingUp from "./components/SignUp/SingUp";
 import SingIn from "./components/SignIn/SingIn";
 import config from "./config.json"
+import SuccessAuth from "./components/SuccessAuth/SuccessAuth";
 
 
-export const settings = config.test_settings
+export const settings = config.prod_settings
 export const base_url = settings.base_url
+export const bonus_id = settings.bonus_id
 export const prod_price = settings.prod_price
 
 function App() {
@@ -27,9 +29,9 @@ function App() {
     const [orderSumaState, setOrderSuma]= useState(0)
 
     let uid = tg.initDataUnsafe?.user?.id
-    if(!uid){
-        uid = 516842877
-    }
+    // if(!uid){
+    //     uid = 5322089741
+    // }
 
     useEffect(()=>{
         getShoppingCart({setShoppingCart}, uid)
@@ -100,6 +102,11 @@ function App() {
                         authenticated={authenticated}
                         client={client}
                         uid={uid}/>}/>
+                    <Route path={"SuccessAuth"} element={<SuccessAuth
+                        setClient={setClient}
+                        setAuthenticated={setAuthenticated}
+                        uid={uid}
+                    />}/>
                 </Routes>
         </div>
     );

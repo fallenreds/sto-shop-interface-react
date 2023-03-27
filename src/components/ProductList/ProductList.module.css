@@ -26,10 +26,33 @@
     margin-top: 10px;
     justify-content: space-between;
 }
-
+.fakeblock{
+    padding-top: 450px;
+}
 .maintext{
     text-align: center;
     font-family: 'Montserrat';
     font-weight: bold;
     /*margin-top: 30px;*/
+}
+html {
+    scroll-behavior: smooth;
+}
+.AuthContainer{
+    font-family: 'Montserrat';
+    margin-top: 45px;
+}
+
+
+.AuthButtonContainer{
+    margin-top: 45px;
+    display: flex;
+    justify-content: space-around;
+    flex-direction: row;
+}
+a.text:active, /* активная/посещенная ссылка */
+a.text:hover,  /* при наведении */
+a.text {
+    text-decoration: none;
+    color: #666;
 }
